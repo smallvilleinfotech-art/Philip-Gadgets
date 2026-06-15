@@ -3,11 +3,69 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Philip Gadgets – Latest Smartphones & Gadgets at the Best Prices</title>
-<meta name="description" content="Philip Gadgets – Nigeria's trusted online gadget store. Buy genuine smartphones, laptops, accessories and more. Brand new & UK used excellent phones. Nationwide delivery, warranty support.">
+<title>Philip Gadgets – Buy Genuine Smartphones, Laptops & Gadgets in Nigeria | Brand New & UK Used</title>
+<meta name="description" content="Philip Gadgets – Nigeria's trusted online gadget store since 2012. Shop genuine brand new & UK used excellent iPhones, Samsung, Tecno, Infinix, Xiaomi phones, laptops, tablets, smartwatches & accessories. Nationwide delivery, warranty support, WhatsApp ordering.">
+<meta name="keywords" content="buy phones in Nigeria, gadgets Nigeria, UK used phones Lagos, iPhone Nigeria, Samsung Galaxy Nigeria, Tecno phones, Infinix phones, Xiaomi Nigeria, smartphones Ikeja, gadget store Lagos, mobile phones Computer Village, telecommunication gadgets, accessories Nigeria, laptops Nigeria">
+<meta name="robots" content="index, follow">
+<meta name="author" content="Philip Gadgets">
+<link rel="canonical" href="https://smallvilleinfotech-art.github.io/Philip-Gadgets/">
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://smallvilleinfotech-art.github.io/Philip-Gadgets/">
+<meta property="og:title" content="Philip Gadgets – Genuine Smartphones, Laptops & Gadgets in Nigeria">
+<meta property="og:description" content="Brand new & UK used excellent phones. iPhone, Samsung, Tecno, Infinix, Xiaomi and more. Nationwide delivery across Nigeria with warranty support.">
+<meta property="og:locale" content="en_NG">
+<meta property="og:site_name" content="Philip Gadgets">
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Philip Gadgets – Genuine Smartphones, Laptops & Gadgets in Nigeria">
+<meta name="twitter:description" content="Brand new & UK used excellent phones. iPhone, Samsung, Tecno, Infinix, Xiaomi and more. Nationwide delivery across Nigeria with warranty support.">
+
+<!-- Geo -->
+<meta name="geo.region" content="NG-LA">
+<meta name="geo.placename" content="Lagos, Nigeria">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@700;800;900&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+
+<!-- Structured Data: LocalBusiness / Store -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ElectronicsStore",
+  "name": "Philip Gadgets",
+  "description": "Nigeria's trusted online gadget store since 2012. Genuine brand new and UK used excellent smartphones, laptops, tablets, smartwatches and accessories with nationwide delivery and warranty support.",
+  "url": "https://smallvilleinfotech-art.github.io/Philip-Gadgets/",
+  "telephone": "+2348132951111",
+  "priceRange": "₦₦",
+  "address": [
+    {
+      "@type": "PostalAddress",
+      "streetAddress": "Pleasure Bus Stop, Abule Egba",
+      "addressLocality": "Lagos",
+      "addressCountry": "NG"
+    },
+    {
+      "@type": "PostalAddress",
+      "streetAddress": "Computer Village, Ikeja",
+      "addressLocality": "Lagos",
+      "addressCountry": "NG"
+    }
+  ],
+  "areaServed": {
+    "@type": "Country",
+    "name": "Nigeria"
+  },
+  "openingHours": "Mo-Sa 08:00-20:00, Su 12:00-17:00",
+  "sameAs": [
+    "https://wa.me/2348132951111"
+  ]
+}
+</script>
+
 <style>
 :root {
   --purple: #6B21A8;
@@ -240,7 +298,7 @@ img{ max-width:100%; display:block; }
 }
 .product-badge.hot{ background:#EF4444; }
 .product-badge.sale{ background:#F59E0B; }
-.product-badge.used{ background:#0EA5E9; }
+.product-badge.used{ background:#D97706; }
 .product-info{ padding:16px; }
 .product-brand{ font-size:11px; color:var(--purple); font-weight:600; text-transform:uppercase; letter-spacing:.06em; margin-bottom:4px; }
 .product-name{ font-size:15px; font-weight:700; color:var(--gray-900); margin-bottom:6px; line-height:1.3; }
@@ -486,15 +544,38 @@ footer{ background:var(--gray-900); color:rgba(255,255,255,0.85); padding:64px 0
   display:flex; align-items:center;
   background:rgba(255,255,255,0.12); border:1px solid rgba(255,255,255,0.25);
   border-radius:var(--radius); padding:10px 18px; gap:10px;
-  max-width:380px; margin-bottom:28px;
+  max-width:380px; margin-bottom:28px; position:relative;
 }
 .search-bar input{ background:none; border:none; outline:none; font-size:14px; color:#fff; flex:1; }
 .search-bar input::placeholder{ color:rgba(255,255,255,0.55); }
 .search-bar svg{ width:18px; height:18px; fill:rgba(255,255,255,0.7); flex-shrink:0; }
+.search-wrap{ position:relative; max-width:380px; }
+.search-results{
+  display:none; position:absolute; top:calc(100% + 8px); left:0; right:0;
+  background:#fff; border-radius:var(--radius); box-shadow:var(--shadow-lg);
+  max-height:420px; overflow-y:auto; z-index:50; padding:8px;
+}
+.search-results.open{ display:block; }
+.search-result-item{
+  display:flex; align-items:center; gap:12px; padding:10px;
+  border-radius:var(--radius-sm); transition:background .15s;
+}
+.search-result-item:hover{ background:var(--purple-soft); }
+.search-result-item img{ width:48px; height:48px; object-fit:contain; border-radius:6px; background:var(--gray-50); flex-shrink:0; }
+.search-result-info{ flex:1; min-width:0; }
+.search-result-name{ font-size:13px; font-weight:700; color:var(--gray-900); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.search-result-meta{ font-size:11px; color:var(--purple); font-weight:600; }
+.search-result-price{ font-size:12px; color:var(--gray-600); }
+.search-result-wa{
+  background:#25D366; color:#fff; font-size:11px; font-weight:700;
+  padding:6px 10px; border-radius:6px; flex-shrink:0; white-space:nowrap;
+}
+.search-no-results{ padding:16px; text-align:center; color:var(--gray-600); font-size:13px; }
+.search-no-results a{ color:var(--purple); font-weight:700; text-decoration:underline; }
 
 /* ── UK USED BADGE ── */
 .uk-used-section{
-  background:linear-gradient(135deg,#0EA5E9,#0284C7);
+  background:linear-gradient(135deg, var(--purple-mid) 0%, var(--purple) 60%, var(--purple-deep) 100%);
   color:#fff; padding:60px 0; text-align:center;
 }
 .uk-used-inner{ display:flex; align-items:center; gap:48px; justify-content:center; flex-wrap:wrap; }
@@ -533,6 +614,9 @@ footer{ background:var(--gray-900); color:rgba(255,255,255,0.85); padding:64px 0
   .hero-btns .btn{ justify-content:center; }
   .about-stat-chips{ flex-wrap:wrap; }
   .stats-grid{ grid-template-columns:1fr 1fr; }
+  .search-wrap{ max-width:100%; }
+  .search-bar{ max-width:100%; }
+  .uk-used-inner{ text-align:center; justify-content:center; }
 }
 </style>
 </head>
@@ -589,9 +673,12 @@ footer{ background:var(--gray-900); color:rgba(255,255,255,0.85); padding:64px 0
           <div class="hero-badge"><span></span> Nigeria's Trusted Gadget Store</div>
           <h1>Latest Smartphones &amp; Gadgets at the <em>Best Prices</em></h1>
           <p>From Apple to Samsung, Tecno to Xiaomi — we deliver genuine phones and gadgets to your door, anywhere in Nigeria. Brand new &amp; UK used excellent phones. Over 5,000 happy buyers and counting.</p>
-          <div class="search-bar">
-            <svg viewBox="0 0 24 24"><path d="M21 21l-4.35-4.35M17 11A6 6 0 115 11a6 6 0 0112 0z" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
-            <input type="text" placeholder="Search phones, tablets, accessories…" id="hero-search">
+          <div class="search-wrap">
+            <div class="search-bar">
+              <svg viewBox="0 0 24 24"><path d="M21 21l-4.35-4.35M17 11A6 6 0 115 11a6 6 0 0112 0z" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
+              <input type="text" placeholder="Search phones, tablets, accessories…" id="hero-search" autocomplete="off">
+            </div>
+            <div class="search-results" id="search-results"></div>
           </div>
           <div class="hero-btns">
             <a onclick="showPage('products')" class="btn btn-purple">Shop Now →</a>
@@ -609,7 +696,7 @@ footer{ background:var(--gray-900); color:rgba(255,255,255,0.85); padding:64px 0
         <div class="hero-right">
           <div class="hero-phone-card">
             <div class="badge-hot">🔥 Hot Deal</div>
-            <img src="https://fdn2.gsmarena.com/vv/bigpic/apple-iphone-15-pro-max.jpg" alt="iPhone 15 Pro Max" class="phone-img-real" onerror="this.src='https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-15-pro-hero?wid=320&hei=420&fmt=jpeg'">
+            <img src="images/products/iphone-15-pro-max.jpg" alt="iPhone 15 Pro Max" class="phone-img-real" loading="lazy">
             <h4>iPhone 15 Pro Max</h4>
             <div class="price">Ask for best price</div>
             <a href="https://wa.me/2348132951111?text=Hi%20Philip%20Gadgets%2C%20I%20am%20interested%20in%20the%20iPhone%2015%20Pro%20Max" target="_blank" class="wa-mini">
@@ -619,7 +706,7 @@ footer{ background:var(--gray-900); color:rgba(255,255,255,0.85); padding:64px 0
           </div>
           <div class="hero-phone-card" style="margin-right:32px;">
             <div class="badge-hot" style="background:#7C3AED">New Arrival</div>
-            <img src="https://fdn2.gsmarena.com/vv/bigpic/samsung-galaxy-s24-ultra5g.jpg" alt="Samsung Galaxy S24 Ultra" class="phone-img-real" onerror="this.src='https://images.samsung.com/is/image/samsung/p6pim/global/2401/gallery/global-galaxy-s24-ultra-sm-s928-sm-s928bzadeub-thumb-539573445'">
+            <img src="images/products/samsung-galaxy-s24-ultra.jpg" alt="Samsung Galaxy S24 Ultra" class="phone-img-real" loading="lazy">
             <h4>Samsung Galaxy S24 Ultra</h4>
             <div class="price">Ask for best price</div>
             <a href="https://wa.me/2348132951111?text=Hi%20Philip%20Gadgets%2C%20I%20am%20interested%20in%20the%20Samsung%20Galaxy%20S24%20Ultra" target="_blank" class="wa-mini">
@@ -938,11 +1025,27 @@ footer{ background:var(--gray-900); color:rgba(255,255,255,0.85); padding:64px 0
         <div class="faq-item"><button class="faq-q">What payment methods do you accept? <span class="faq-icon">+</span></button><div class="faq-a">We accept bank transfers to our verified account. Payment details are shared via WhatsApp after you confirm your order. We do not request payment through unknown links.</div></div>
         <div class="faq-item"><button class="faq-q">What is your warranty and return policy? <span class="faq-icon">+</span></button><div class="faq-a">Brand new devices come with full manufacturer warranty. UK used phones come with our in-house service guarantee. If there's a fault within the agreed period, we'll work with you to fix or replace it. Contact us immediately via WhatsApp if there's any issue.</div></div>
         <div class="faq-item"><button class="faq-q">Can I see the product before I pay? <span class="faq-icon">+</span></button><div class="faq-a">If you're in Lagos, you can visit us at our Abule Egba or Computer Village location. For out-of-state buyers, we can send a video of the exact unit before shipping.</div></div>
-        <div class="faq-item"><button class="faq-q">How do I track my delivery? <span class="faq-icon">+</span></button><div class="faq-a">Once your order ships, we send you the courier tracking number via WhatsApp. You can monitor delivery directly on the courier's website.</div></div>
       </div>
     </div>
   </section>
 </div>
+
+<!-- Structured Data: FAQPage -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {"@type":"Question","name":"Are the products genuine and new?","acceptedAnswer":{"@type":"Answer","text":"Yes, 100%. Every brand new product we sell is authentic and sourced from certified, authorised distributors. We also sell UK used phones in excellent condition — thoroughly tested and verified before sale. Our 12-year reputation depends on honesty."}},
+    {"@type":"Question","name":"Do you sell UK used phones?","acceptedAnswer":{"@type":"Answer","text":"Yes! We sell UK used phones in excellent condition. These are phones previously used in the United Kingdom and are in top-notch condition — no cracks, tested battery health, and fully functional. They come at more affordable prices than brand new but deliver near-identical performance."}},
+    {"@type":"Question","name":"How do I place an order?","acceptedAnswer":{"@type":"Answer","text":"Simply click the Order via WhatsApp button on any product, or chat us directly at +234 813 295 1111. Tell us what you want, we confirm availability and price, and we arrange payment and delivery."}},
+    {"@type":"Question","name":"Do you deliver nationwide?","acceptedAnswer":{"@type":"Answer","text":"Yes! We deliver to all 36 states in Nigeria through reliable courier partners. Lagos: same or next day. Other states: typically 1–3 business days. International orders are also available."}},
+    {"@type":"Question","name":"What payment methods do you accept?","acceptedAnswer":{"@type":"Answer","text":"We accept bank transfers to our verified account. Payment details are shared via WhatsApp after you confirm your order. We do not request payment through unknown links."}},
+    {"@type":"Question","name":"What is your warranty and return policy?","acceptedAnswer":{"@type":"Answer","text":"Brand new devices come with full manufacturer warranty. UK used phones come with our in-house service guarantee. If there's a fault within the agreed period, we'll work with you to fix or replace it."}},
+    {"@type":"Question","name":"Can I see the product before I pay?","acceptedAnswer":{"@type":"Answer","text":"If you're in Lagos, you can visit us at our Abule Egba or Computer Village location. For out-of-state buyers, we can send a video of the exact unit before shipping."}}
+  ]
+}
+</script>
 
 <!-- FOOTER (shown on all pages) -->
 <footer>
@@ -1008,41 +1111,131 @@ footer{ background:var(--gray-900); color:rgba(255,255,255,0.85); padding:64px 0
 <script>
 const WA = '2348132951111';
 
+// ── ADMIN TRACKING (Google Apps Script backend) ──
+// Replace with your deployed Apps Script Web App URL (Settings tab in admin.html)
+const TRACKING_URL = 'YOUR_APPS_SCRIPT_URL_HERE';
+
+function trackEvent(payload) {
+  if (!TRACKING_URL || TRACKING_URL.includes('YOUR_APPS_SCRIPT_URL_HERE')) return;
+  try {
+    fetch(TRACKING_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify(payload)
+    }).catch(() => {});
+  } catch (err) { /* fail silently — never block the user */ }
+}
+
+function trackWhatsAppClick(productName) {
+  trackEvent({
+    action: 'logEnquiry',
+    type: 'whatsapp_click',
+    product: productName,
+    message: `Customer clicked "Order via WhatsApp" for ${productName}`,
+    source: 'website'
+  });
+}
+
+let _searchDebounce;
+function trackSearch(query, resultsCount) {
+  clearTimeout(_searchDebounce);
+  _searchDebounce = setTimeout(() => {
+    if (!query) return;
+    trackEvent({ action: 'logSearch', query, resultsCount });
+  }, 800); // debounce so we don't log every keystroke
+}
+
 // ── PRODUCT DATA with real GSMArena images ──
 const products = [
   // Brand New
-  {id:1, name:'iPhone 16 Pro Max', brand:'Apple', img:'https://fdn2.gsmarena.com/vv/bigpic/apple-iphone-16-pro-max.jpg', badge:'New', badgeType:'', tab:['all','new','best'], condition:'Brand New',
+  {id:1, name:'iPhone 16 Pro Max', brand:'Apple', img:'images/products/iphone-16-pro-max.jpg', badge:'New', badgeType:'', tab:['all','new','best'], condition:'Brand New',
     specs:'6.9" Super Retina XDR · A18 Pro · 48MP Camera · 5G · iOS 18', price:'Ask for price'},
-  {id:2, name:'iPhone 15 Pro Max', brand:'Apple', img:'https://fdn2.gsmarena.com/vv/bigpic/apple-iphone-15-pro-max.jpg', badge:'Hot', badgeType:'hot', tab:['all','new','best','deals'], condition:'Brand New',
+  {id:2, name:'iPhone 15 Pro Max', brand:'Apple', img:'images/products/iphone-15-pro-max.jpg', badge:'Hot', badgeType:'hot', tab:['all','new','best','deals'], condition:'Brand New',
     specs:'6.7" Super Retina · A17 Pro · 48MP ProRAW · 5G · Titanium', price:'Ask for price'},
-  {id:3, name:'iPhone 14 Pro', brand:'Apple', img:'https://fdn2.gsmarena.com/vv/bigpic/apple-iphone-14-pro.jpg', badge:'Sale', badgeType:'sale', tab:['all','new','deals'], condition:'Brand New',
+  {id:3, name:'iPhone 14 Pro', brand:'Apple', img:'images/products/iphone-14-pro.jpg', badge:'Sale', badgeType:'sale', tab:['all','new','deals'], condition:'Brand New',
     specs:'6.1" Always-On · A16 Bionic · 48MP · 5G · Dynamic Island', price:'Ask for price'},
-  {id:4, name:'iPhone 14', brand:'Apple', img:'https://fdn2.gsmarena.com/vv/bigpic/apple-iphone-14.jpg', badge:'Sale', badgeType:'sale', tab:['all','new','deals'], condition:'Brand New',
+  {id:4, name:'iPhone 14', brand:'Apple', img:'images/products/iphone-14.jpg', badge:'Sale', badgeType:'sale', tab:['all','new','deals'], condition:'Brand New',
     specs:'6.1" Super Retina · A15 Bionic · 12MP · 5G · iOS 17', price:'Ask for price', oldPrice:'₦750,000'},
-  {id:5, name:'Samsung Galaxy S24 Ultra', brand:'Samsung', img:'https://fdn2.gsmarena.com/vv/bigpic/samsung-galaxy-s24-ultra5g.jpg', badge:'Hot', badgeType:'hot', tab:['all','new','best'], condition:'Brand New',
+  {id:5, name:'Samsung Galaxy S24 Ultra', brand:'Samsung', img:'images/products/samsung-galaxy-s24-ultra.jpg', badge:'Hot', badgeType:'hot', tab:['all','new','best'], condition:'Brand New',
     specs:'6.8" Dynamic AMOLED · Snapdragon 8 Gen 3 · 200MP · S Pen · 5G', price:'Ask for price'},
-  {id:6, name:'Samsung Galaxy S24+', brand:'Samsung', img:'https://fdn2.gsmarena.com/vv/bigpic/samsung-galaxy-s24plus5g.jpg', badge:'New', badgeType:'', tab:['all','new'], condition:'Brand New',
-    specs:'6.7" Dynamic AMOLED · Snapdragon 8 Gen 3 · 50MP · 5G', price:'Ask for price'},
-  {id:7, name:'Samsung Galaxy A55 5G', brand:'Samsung', img:'https://fdn2.gsmarena.com/vv/bigpic/samsung-galaxy-a55.jpg', badge:'New', badgeType:'', tab:['all','new','best'], condition:'Brand New',
+  {id:6, name:'Samsung Galaxy S25 Ultra', brand:'Samsung', img:'images/products/samsung-galaxy-s25-ultra.jpg', badge:'New', badgeType:'', tab:['all','new','best'], condition:'Brand New',
+    specs:'6.9" Dynamic AMOLED 2X · Snapdragon 8 Elite · 200MP · S Pen · 5G', price:'Ask for price'},
+  {id:7, name:'Samsung Galaxy A55 5G', brand:'Samsung', img:'images/products/samsung-galaxy-a55.jpg', badge:'New', badgeType:'', tab:['all','new','best'], condition:'Brand New',
     specs:'6.6" Super AMOLED · Exynos 1480 · 50MP OIS · 5G · IP67', price:'Ask for price'},
-  {id:8, name:'Tecno Camon 30 Pro 5G', brand:'Tecno', img:'https://fdn2.gsmarena.com/vv/bigpic/tecno-camon-30-pro-5g.jpg', badge:'New', badgeType:'', tab:['all','new'], condition:'Brand New',
+  {id:8, name:'Samsung Galaxy A56 5G', brand:'Samsung', img:'images/products/samsung-galaxy-a56.jpg', badge:'New', badgeType:'', tab:['all','new'], condition:'Brand New',
+    specs:'6.7" Super AMOLED 120Hz · Exynos 1580 · 50MP OIS · 5G · IP67', price:'Ask for price'},
+  {id:9, name:'Tecno Camon 30 Pro 5G', brand:'Tecno', img:'images/products/tecno-camon-30-pro.jpg', badge:'New', badgeType:'', tab:['all','new'], condition:'Brand New',
     specs:'6.77" AMOLED · Dimensity 7020 · 50MP · 5G · 5000mAh', price:'Ask for price'},
-  {id:9, name:'Infinix Note 40 Pro 5G', brand:'Infinix', img:'https://fdn2.gsmarena.com/vv/bigpic/infinix-note-40-pro-5g.jpg', badge:'Hot', badgeType:'hot', tab:['all','new','best'], condition:'Brand New',
+  {id:10, name:'Tecno Camon 40 Pro', brand:'Tecno', img:'images/products/tecno-camon-40-pro.jpg', badge:'Hot', badgeType:'hot', tab:['all','new','best'], condition:'Brand New',
+    specs:'6.78" AMOLED 144Hz · Dimensity 7300 · 50MP OIS · 5G · 5200mAh', price:'Ask for price'},
+  {id:11, name:'Tecno Spark 20 Pro+', brand:'Tecno', img:'images/products/tecno-spark-20-pro-plus.jpg', badge:'New', badgeType:'', tab:['all','new','deals'], condition:'Brand New',
+    specs:'6.78" AMOLED 120Hz · Helio G99 · 108MP · 5000mAh · 33W', price:'Ask for price'},
+  {id:12, name:'Tecno Spark 20 Pro', brand:'Tecno', img:'images/products/tecno-spark-20-pro.jpg', badge:'Sale', badgeType:'sale', tab:['all','new','deals'], condition:'Brand New',
+    specs:'6.78" AMOLED 120Hz · Helio G99 · 108MP OIS · 5000mAh · 33W', price:'Ask for price'},
+  {id:13, name:'Tecno POVA 6 Pro 5G', brand:'Tecno', img:'images/products/tecno-pova-6-pro.jpg', badge:'New', badgeType:'', tab:['all','new'], condition:'Brand New',
+    specs:'6.78" AMOLED 120Hz · Dimensity 6300 · 64MP · 5G · 6000mAh 70W', price:'Ask for price'},
+  {id:14, name:'Infinix Note 40 Pro 5G', brand:'Infinix', img:'images/products/infinix-note-40-pro.jpg', badge:'Hot', badgeType:'hot', tab:['all','new','best'], condition:'Brand New',
     specs:'6.78" AMOLED 144Hz · Dimensity 7020 · 108MP · 5G · 45W', price:'Ask for price'},
-  {id:10, name:'Xiaomi 14 Ultra', brand:'Xiaomi', img:'https://fdn2.gsmarena.com/vv/bigpic/xiaomi-14-ultra.jpg', badge:'New', badgeType:'', tab:['all','new'], condition:'Brand New',
+  {id:15, name:'Infinix Note 50 Pro', brand:'Infinix', img:'images/products/infinix-note-50-pro.jpg', badge:'New', badgeType:'', tab:['all','new','best'], condition:'Brand New',
+    specs:'6.78" AMOLED 144Hz · Dimensity 7300 · 108MP OIS · 5G · 45W', price:'Ask for price'},
+  {id:16, name:'Infinix Hot 50 5G', brand:'Infinix', img:'images/products/infinix-hot-50.jpg', badge:'New', badgeType:'', tab:['all','new','deals'], condition:'Brand New',
+    specs:'6.78" AMOLED 120Hz · Dimensity 6300 · 108MP · 5G · 5000mAh', price:'Ask for price'},
+  {id:17, name:'Infinix Zero 40 5G', brand:'Infinix', img:'images/products/infinix-zero-40.jpg', badge:'Hot', badgeType:'hot', tab:['all','new','best'], condition:'Brand New',
+    specs:'6.78" AMOLED 144Hz · Dimensity 8200 · 50MP OIS · 5G · 45W Wireless', price:'Ask for price'},
+  {id:18, name:'Xiaomi 14 Ultra', brand:'Xiaomi', img:'images/products/xiaomi-14-ultra.jpg', badge:'New', badgeType:'', tab:['all','new'], condition:'Brand New',
     specs:'6.73" LTPO AMOLED · Snapdragon 8 Gen 3 · Leica 1" Sensor · 5G', price:'Ask for price'},
-  {id:11, name:'Xiaomi Redmi Note 13 Pro', brand:'Xiaomi', img:'https://fdn2.gsmarena.com/vv/bigpic/xiaomi-redmi-note-13-pro.jpg', badge:'Sale', badgeType:'sale', tab:['all','new','deals'], condition:'Brand New',
+  {id:19, name:'Xiaomi Redmi Note 13 Pro', brand:'Xiaomi', img:'images/products/redmi-note-13-pro.jpg', badge:'Sale', badgeType:'sale', tab:['all','new','deals'], condition:'Brand New',
     specs:'6.67" AMOLED 120Hz · Dimensity 7200 · 200MP · 5G · 67W', price:'Ask for price'},
-  {id:12, name:'JBL Flip 6 Speaker', brand:'JBL', img:'https://fdn2.gsmarena.com/vv/bigpic/jbl-flip-6.jpg', badge:'Hot', badgeType:'hot', tab:['all','new','best'], condition:'Brand New',
+  {id:20, name:'Xiaomi Redmi Note 14 Pro+', brand:'Xiaomi', img:'images/products/redmi-note-14-pro-plus.jpg', badge:'New', badgeType:'', tab:['all','new','best'], condition:'Brand New',
+    specs:'6.67" AMOLED 120Hz · Dimensity 7300 Ultra · 200MP OIS · 5G · 120W', price:'Ask for price'},
+  {id:21, name:'POCO X6 Pro 5G', brand:'POCO', img:'images/products/poco-x6-pro.jpg', badge:'Hot', badgeType:'hot', tab:['all','new','best'], condition:'Brand New',
+    specs:'6.67" AMOLED 120Hz · Dimensity 8300 Ultra · 64MP · 5G · 67W', price:'Ask for price'},
+  {id:22, name:'POCO X7 Pro 5G', brand:'POCO', img:'images/products/poco-x7-pro.jpg', badge:'New', badgeType:'', tab:['all','new','best'], condition:'Brand New',
+    specs:'6.67" AMOLED 120Hz · Dimensity 8400 Ultra · 50MP OIS · 5G · 90W', price:'Ask for price'},
+  {id:23, name:'OnePlus 12', brand:'OnePlus', img:'images/products/oneplus-12.jpg', badge:'Hot', badgeType:'hot', tab:['all','new','best'], condition:'Brand New',
+    specs:'6.82" LTPO AMOLED · Snapdragon 8 Gen 3 · Hasselblad 50MP · 5G · 100W', price:'Ask for price'},
+  {id:24, name:'OnePlus Nord 4 5G', brand:'OnePlus', img:'images/products/oneplus-nord-4.jpg', badge:'New', badgeType:'', tab:['all','new','deals'], condition:'Brand New',
+    specs:'6.74" AMOLED 120Hz · Snapdragon 7+ Gen 3 · 50MP OIS · 5G · 100W', price:'Ask for price'},
+  {id:25, name:'realme 12 Pro+ 5G', brand:'realme', img:'images/products/realme-12-pro-plus.jpg', badge:'New', badgeType:'', tab:['all','new'], condition:'Brand New',
+    specs:'6.7" Curved AMOLED · Snapdragon 6 Gen 1 · 50MP Periscope · 5G · 67W', price:'Ask for price'},
+  {id:26, name:'vivo V30 Pro 5G', brand:'vivo', img:'images/products/vivo-v30-pro.jpg', badge:'New', badgeType:'', tab:['all','new','best'], condition:'Brand New',
+    specs:'6.78" AMOLED 120Hz · Dimensity 8200 · Zeiss 50MP · 5G · 80W', price:'Ask for price'},
+  {id:27, name:'vivo V30 5G', brand:'vivo', img:'images/products/vivo-v30.jpg', badge:'New', badgeType:'', tab:['all','new'], condition:'Brand New',
+    specs:'6.78" AMOLED 120Hz · Snapdragon 7 Gen 3 · Zeiss 50MP · 5G · 80W', price:'Ask for price'},
+  {id:28, name:'vivo Y200 5G', brand:'vivo', img:'images/products/vivo-y200.jpg', badge:'Sale', badgeType:'sale', tab:['all','new','deals'], condition:'Brand New',
+    specs:'6.67" AMOLED 120Hz · Snapdragon 6 Gen 1 · 50MP OIS · 5G · 44W', price:'Ask for price'},
+  {id:29, name:'OPPO Reno11 Pro 5G', brand:'OPPO', img:'images/products/oppo-reno11-pro.jpg', badge:'New', badgeType:'', tab:['all','new','best'], condition:'Brand New',
+    specs:'6.7" Curved AMOLED · Dimensity 8200 · 50MP Portrait · 5G · 80W', price:'Ask for price'},
+  {id:30, name:'Google Pixel 8 Pro', brand:'Google', img:'images/products/google-pixel-8-pro.jpg', badge:'Hot', badgeType:'hot', tab:['all','new','best'], condition:'Brand New',
+    specs:'6.7" LTPO OLED · Google Tensor G3 · 50MP · 5G · AI Camera Suite', price:'Ask for price'},
+  {id:31, name:'Google Pixel 8a', brand:'Google', img:'images/products/google-pixel-8a.jpg', badge:'New', badgeType:'', tab:['all','new','deals'], condition:'Brand New',
+    specs:'6.1" OLED 120Hz · Google Tensor G3 · 64MP · 5G · 7 Years Updates', price:'Ask for price'},
+  {id:32, name:'Nothing Phone (2a)', brand:'Nothing', img:'images/products/nothing-phone-2a.jpg', badge:'New', badgeType:'', tab:['all','new'], condition:'Brand New',
+    specs:'6.7" AMOLED 120Hz · Dimensity 7200 Pro · 50MP · 5G · Glyph Interface', price:'Ask for price'},
+  {id:33, name:'HONOR X9b 5G', brand:'HONOR', img:'images/products/honor-x9b.jpg', badge:'New', badgeType:'', tab:['all','new','deals'], condition:'Brand New',
+    specs:'6.78" AMOLED 120Hz · Snapdragon 6 Gen 1 · 108MP OIS · 5G · 35W', price:'Ask for price'},
+  {id:34, name:'Motorola Edge 50 Fusion', brand:'Motorola', img:'images/products/motorola-edge-50-fusion.jpg', badge:'New', badgeType:'', tab:['all','new'], condition:'Brand New',
+    specs:'6.7" pOLED 144Hz · Snapdragon 7s Gen 2 · 50MP OIS · 5G · 68W', price:'Ask for price'},
+  {id:35, name:'ASUS ROG Phone 8', brand:'ASUS', img:'images/products/asus-rog-phone-8.jpg', badge:'Hot', badgeType:'hot', tab:['all','new','best'], condition:'Brand New',
+    specs:'6.78" AMOLED 165Hz · Snapdragon 8 Gen 3 · 50MP · 5G · Gaming Flagship', price:'Ask for price'},
+  {id:36, name:'itel S24 Ultra', brand:'itel', img:'images/products/itel-s24-ultra.jpg', badge:'New', badgeType:'', tab:['all','new','deals'], condition:'Brand New',
+    specs:'6.78" AMOLED · Helio G99 · 108MP · 5000mAh · 33W', price:'Ask for price'},
+  {id:37, name:'itel P55 5G', brand:'itel', img:'images/products/itel-p55.jpg', badge:'Sale', badgeType:'sale', tab:['all','new','deals'], condition:'Brand New',
+    specs:'6.6" 120Hz Display · Dimensity 6300 · 50MP · 5G · 5000mAh', price:'Ask for price'},
+  {id:38, name:'itel A70', brand:'itel', img:'images/products/itel-a70.jpg', badge:'Sale', badgeType:'sale', tab:['all','new','deals'], condition:'Brand New',
+    specs:'6.6" HD+ Display · Unisoc Tiger T606 · 13MP · 5000mAh', price:'Ask for price'},
+  {id:39, name:'itel P40+', brand:'itel', img:'images/products/itel-p40-plus.jpg', badge:'Sale', badgeType:'sale', tab:['all','new','deals'], condition:'Brand New',
+    specs:'6.6" HD+ 90Hz · Unisoc T606 · 50MP AI Camera · 5000mAh 18W', price:'Ask for price'},
+  {id:40, name:'JBL Flip 6 Speaker', brand:'JBL', img:'images/products/jbl-flip-6.jpg', badge:'Hot', badgeType:'hot', tab:['all','new','best'], condition:'Brand New',
     specs:'30W output · IP67 waterproof · 12hr battery · Bluetooth 5.1', price:'Ask for price'},
   // UK Used Excellent
-  {id:13, name:'iPhone 13 Pro Max', brand:'Apple', img:'https://fdn2.gsmarena.com/vv/bigpic/apple-iphone-13-pro-max.jpg', badge:'UK Used', badgeType:'used', tab:['all','used'], condition:'UK Used Excellent',
+  {id:41, name:'iPhone 13 Pro Max', brand:'Apple', img:'images/products/iphone-13-pro-max-used.jpg', badge:'UK Used', badgeType:'used', tab:['all','used'], condition:'UK Used Excellent',
     specs:'6.7" ProMotion · A15 Bionic · 12MP ProRAW · 5G · Excellent Condition', price:'Ask for price'},
-  {id:14, name:'iPhone 12 Pro', brand:'Apple', img:'https://fdn2.gsmarena.com/vv/bigpic/apple-iphone-12-pro.jpg', badge:'UK Used', badgeType:'used', tab:['all','used','deals'], condition:'UK Used Excellent',
+  {id:42, name:'iPhone 12 Pro', brand:'Apple', img:'images/products/iphone-12-pro-used.jpg', badge:'UK Used', badgeType:'used', tab:['all','used','deals'], condition:'UK Used Excellent',
     specs:'6.1" Super Retina · A14 Bionic · 12MP · 5G · Excellent Condition', price:'Ask for price'},
-  {id:15, name:'Samsung Galaxy S23 Ultra', brand:'Samsung', img:'https://fdn2.gsmarena.com/vv/bigpic/samsung-galaxy-s23-ultra5g.jpg', badge:'UK Used', badgeType:'used', tab:['all','used'], condition:'UK Used Excellent',
+  {id:43, name:'Samsung Galaxy S23 Ultra', brand:'Samsung', img:'images/products/samsung-galaxy-s23-ultra-used.jpg', badge:'UK Used', badgeType:'used', tab:['all','used'], condition:'UK Used Excellent',
     specs:'6.8" Dynamic AMOLED · Snapdragon 8 Gen 2 · 200MP · S Pen · Excellent', price:'Ask for price'},
-  {id:16, name:'Samsung Galaxy S22+', brand:'Samsung', img:'https://fdn2.gsmarena.com/vv/bigpic/samsung-galaxy-s22-5g.jpg', badge:'UK Used', badgeType:'used', tab:['all','used','deals'], condition:'UK Used Excellent',
+  {id:44, name:'Samsung Galaxy S22+', brand:'Samsung', img:'images/products/samsung-galaxy-s22-plus-used.jpg', badge:'UK Used', badgeType:'used', tab:['all','used','deals'], condition:'UK Used Excellent',
     specs:'6.1" Dynamic AMOLED · Snapdragon 8 Gen 1 · 50MP · 5G · Excellent', price:'Ask for price'},
 ];
 
@@ -1052,6 +1245,17 @@ const brands = [
   {name:'Tecno', logo:'https://upload.wikimedia.org/wikipedia/commons/8/8b/TECNO_Mobile_Logo.svg', color:'#0068B3'},
   {name:'Infinix', logo:'https://upload.wikimedia.org/wikipedia/commons/4/41/Infinix_Mobility_Logo.png', color:'#E2231A'},
   {name:'Xiaomi', logo:'https://upload.wikimedia.org/wikipedia/commons/2/29/Xiaomi_logo.svg', color:'#FF6900'},
+  {name:'POCO', logo:'https://upload.wikimedia.org/wikipedia/commons/8/85/Poco_logo.svg', color:'#FFD700'},
+  {name:'OnePlus', logo:'https://upload.wikimedia.org/wikipedia/commons/4/4c/OnePlus_logo.svg', color:'#F50514'},
+  {name:'realme', logo:'https://upload.wikimedia.org/wikipedia/commons/8/8a/Realme_logo.svg', color:'#FFC900'},
+  {name:'vivo', logo:'https://upload.wikimedia.org/wikipedia/commons/2/2c/Vivo_Logo.svg', color:'#415FFF'},
+  {name:'OPPO', logo:'https://upload.wikimedia.org/wikipedia/commons/c/c1/Oppo_logo.svg', color:'#1BA784'},
+  {name:'Google', logo:'https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg', color:'#4285F4'},
+  {name:'Nothing', logo:'https://upload.wikimedia.org/wikipedia/commons/0/0c/Nothing_logo.svg', color:'#000'},
+  {name:'HONOR', logo:'https://upload.wikimedia.org/wikipedia/commons/4/44/Honor_logo.svg', color:'#0AAEE8'},
+  {name:'Motorola', logo:'https://upload.wikimedia.org/wikipedia/commons/2/27/Motorola_logo.svg', color:'#5C92FA'},
+  {name:'ASUS', logo:'https://upload.wikimedia.org/wikipedia/commons/0/05/ASUS_Logo.svg', color:'#00539B'},
+  {name:'itel', logo:'https://upload.wikimedia.org/wikipedia/commons/3/3a/Itel_Mobile_logo.png', color:'#0072CE'},
   {name:'Oraimo', logo:'https://oraimo.com/favicon.ico', color:'#E63012'},
   {name:'JBL', logo:'https://upload.wikimedia.org/wikipedia/commons/4/40/JBL-Logo.svg', color:'#F26522'},
   {name:'HP', logo:'https://upload.wikimedia.org/wikipedia/commons/a/ad/HP_logo_2012.svg', color:'#0096D6'},
@@ -1073,12 +1277,12 @@ function renderProducts(tab) {
     <div class="product-card">
       ${p.badge ? `<div class="product-badge ${p.badgeType}">${p.badge}</div>` : ''}
       <div class="product-img-wrap">
-        <img src="${p.img}" alt="${p.name}"
-          onerror="this.src='https://via.placeholder.com/200x200/EDE9FE/6B21A8?text=${encodeURIComponent(p.name)}'"
+        <img src="${p.img}" alt="${p.name}" referrerpolicy="no-referrer" crossorigin="anonymous"
+          onerror="this.onerror=null;this.src='https://placehold.co/400x400/EDE9FE/6B21A8?text=${encodeURIComponent(p.name.replace(/ /g,'+'))}'"
           loading="lazy">
       </div>
       <div class="product-info">
-        <div class="product-brand">${p.brand} · <span style="color:#0EA5E9;font-size:10px;">${p.condition}</span></div>
+        <div class="product-brand">${p.brand} · <span style="color:#D97706;font-size:10px;">${p.condition}</span></div>
         <div class="product-name">${p.name}</div>
         <div class="product-specs">${p.specs}</div>
         <div>
@@ -1086,7 +1290,7 @@ function renderProducts(tab) {
           ${p.oldPrice ? `<span class="product-old-price">${p.oldPrice}</span>` : ''}
         </div>
         <div class="product-action">
-          <a href="${waLink(p.name)}" target="_blank" class="product-wa">${WA_SVG} Order via WhatsApp</a>
+          <a href="${waLink(p.name)}" target="_blank" class="product-wa" onclick="trackWhatsAppClick('${p.name.replace(/'/g,"\\'")}')">${WA_SVG} Order via WhatsApp</a>
         </div>
       </div>
     </div>
@@ -1098,7 +1302,7 @@ function renderBrands() {
   if (!el) return;
   el.innerHTML = brands.map(b => `
     <div class="brand-chip">
-      <img src="${b.logo}" alt="${b.name}" onerror="this.style.display='none'">
+      <img src="${b.logo}" alt="${b.name}" referrerpolicy="no-referrer" onerror="this.style.display='none'">
       ${b.name}
     </div>
   `).join('');
@@ -1241,12 +1445,47 @@ function subscribeNewsletter() {
 
 // ── HERO SEARCH ──
 const heroSearch = document.getElementById('hero-search');
-if (heroSearch) heroSearch.addEventListener('keydown', e => {
-  if (e.key === 'Enter') {
-    const q = e.target.value.trim();
-    if (q) window.open(`https://wa.me/${WA}?text=Hi%20Philip%20Gadgets%2C%20I%20am%20looking%20for%3A%20${encodeURIComponent(q)}`, '_blank');
-  }
-});
+const searchResults = document.getElementById('search-results');
+if (heroSearch && searchResults) {
+  heroSearch.addEventListener('input', e => {
+    const q = e.target.value.trim().toLowerCase();
+    if (!q) { searchResults.classList.remove('open'); searchResults.innerHTML = ''; return; }
+    const matches = products.filter(p =>
+      p.name.toLowerCase().includes(q) ||
+      p.brand.toLowerCase().includes(q) ||
+      p.specs.toLowerCase().includes(q) ||
+      p.condition.toLowerCase().includes(q)
+    ).slice(0, 6);
+
+    if (matches.length === 0) {
+      searchResults.innerHTML = `<div class="search-no-results">No exact matches yet — <a href="${`https://wa.me/${WA}?text=Hi%20Philip%20Gadgets%2C%20I%20am%20looking%20for%3A%20${encodeURIComponent(e.target.value.trim())}`}" target="_blank" onclick="trackEvent({action:'logEnquiry',type:'product_request',product:${JSON.stringify(e.target.value.trim())},message:'Searched for a product not in catalogue: '+${JSON.stringify(e.target.value.trim())},source:'website'})">ask us on WhatsApp</a> and we'll source it for you.</div>`;
+    } else {
+      searchResults.innerHTML = matches.map(p => `
+        <div class="search-result-item">
+          <img src="${p.img}" alt="${p.name}" referrerpolicy="no-referrer" crossorigin="anonymous" onerror="this.onerror=null;this.src='https://placehold.co/100x100/EDE9FE/6B21A8?text=${encodeURIComponent(p.brand)}'">
+          <div class="search-result-info">
+            <div class="search-result-name">${p.name}</div>
+            <div class="search-result-meta">${p.brand} · ${p.condition}</div>
+            <div class="search-result-price">${p.price}${p.oldPrice ? ` <span style="text-decoration:line-through;color:var(--gray-400);">${p.oldPrice}</span>` : ''}</div>
+          </div>
+          <a href="${waLink(p.name)}" target="_blank" class="search-result-wa" onclick="trackWhatsAppClick('${p.name.replace(/'/g,"\\'")}')">Order via WhatsApp</a>
+        </div>
+      `).join('');
+    }
+    searchResults.classList.add('open');
+    trackSearch(e.target.value.trim(), matches.length);
+  });
+
+  heroSearch.addEventListener('keydown', e => {
+    if (e.key === 'Enter') e.preventDefault();
+  });
+
+  document.addEventListener('click', e => {
+    if (!e.target.closest('.search-wrap')) {
+      searchResults.classList.remove('open');
+    }
+  });
+}
 
 // ── INIT ──
 initFadeUps();
