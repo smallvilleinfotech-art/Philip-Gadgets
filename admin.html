@@ -1,0 +1,1270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Philips Gadget – Admin Dashboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --purple: #6B21A8;
+    --purple-dark: #4C1D95;
+    --purple-light: #EDE9FE;
+    --purple-soft: #F5F3FF;
+    --purple-mid: #A855F7;
+    --white: #FFFFFF;
+    --gray-50: #F9FAFB;
+    --gray-100: #F3F4F6;
+    --gray-200: #E5E7EB;
+    --gray-300: #D1D5DB;
+    --gray-400: #9CA3AF;
+    --gray-500: #6B7280;
+    --gray-600: #4B5563;
+    --gray-700: #374151;
+    --gray-800: #1F2937;
+    --gray-900: #111827;
+    --green: #059669;
+    --green-light: #D1FAE5;
+    --red: #DC2626;
+    --red-light: #FEE2E2;
+    --amber: #D97706;
+    --amber-light: #FEF3C7;
+    --blue: #2563EB;
+    --blue-light: #DBEAFE;
+    --radius: 12px;
+    --radius-sm: 8px;
+    --radius-lg: 16px;
+    --shadow: 0 4px 24px rgba(107,33,168,0.10);
+    --shadow-sm: 0 2px 8px rgba(0,0,0,0.07);
+    --sidebar-w: 240px;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:'Inter',sans-serif; background:var(--gray-50); color:var(--gray-800); }
+  h1,h2,h3,h4 { font-family:'Plus Jakarta Sans',sans-serif; }
+  a { text-decoration:none; color:inherit; }
+  button { cursor:pointer; font-family:'Inter',sans-serif; }
+
+  /* ── LOGIN SCREEN ── */
+  #login-screen {
+    min-height: 100vh;
+    display: flex; align-items: center; justify-content: center;
+    background: linear-gradient(135deg, #3B0764 0%, #6B21A8 60%, #9333EA 100%);
+  }
+  .login-card {
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    padding: 48px 40px;
+    width: 100%; max-width: 400px;
+    box-shadow: 0 24px 64px rgba(0,0,0,0.25);
+  }
+  .login-logo {
+    display: flex; align-items: center; gap: 10px;
+    font-family:'Plus Jakarta Sans',sans-serif;
+    font-size:22px; font-weight:800; margin-bottom:8px;
+  }
+  .login-logo-icon {
+    width:42px; height:42px;
+    background:var(--purple); border-radius:10px;
+    display:flex; align-items:center; justify-content:center;
+    font-size:20px; color:#fff;
+  }
+  .login-logo span { color:var(--purple); }
+  .login-sub { font-size:13px; color:var(--gray-500); margin-bottom:32px; }
+  .login-badge {
+    background:var(--purple-light); color:var(--purple);
+    font-size:12px; font-weight:600;
+    padding:5px 12px; border-radius:100px;
+    display:inline-block; margin-bottom:24px;
+  }
+  .form-group { margin-bottom:16px; }
+  .form-group label { display:block; font-size:13px; font-weight:600; color:var(--gray-700); margin-bottom:6px; }
+  .form-group input {
+    width:100%; padding:12px 14px;
+    border:1.5px solid var(--gray-200); border-radius:var(--radius-sm);
+    font-size:15px; outline:none; transition:border-color .2s;
+    font-family:'Inter',sans-serif;
+  }
+  .form-group input:focus { border-color:var(--purple); }
+  .login-btn {
+    width:100%; background:var(--purple); color:#fff;
+    padding:14px; border-radius:var(--radius); border:none;
+    font-size:16px; font-weight:700; margin-top:8px;
+    transition:background .2s;
+  }
+  .login-btn:hover { background:var(--purple-dark); }
+  #login-error {
+    display:none; background:var(--red-light); color:var(--red);
+    padding:10px 14px; border-radius:var(--radius-sm);
+    font-size:13px; font-weight:500; margin-top:12px; text-align:center;
+  }
+
+  /* ── MAIN LAYOUT ── */
+  #app { display:none; min-height:100vh; }
+
+  /* ── SIDEBAR ── */
+  #sidebar {
+    position:fixed; top:0; left:0;
+    width:var(--sidebar-w); height:100vh;
+    background:var(--gray-900);
+    display:flex; flex-direction:column;
+    z-index:100; overflow-y:auto;
+  }
+  .sidebar-header {
+    padding:24px 20px;
+    border-bottom:1px solid rgba(255,255,255,0.08);
+  }
+  .sidebar-logo {
+    display:flex; align-items:center; gap:8px;
+    font-family:'Plus Jakarta Sans',sans-serif;
+    font-size:17px; font-weight:800; color:#fff;
+  }
+  .sidebar-logo-icon {
+    width:34px; height:34px; background:var(--purple);
+    border-radius:8px; display:flex; align-items:center;
+    justify-content:center; font-size:16px;
+  }
+  .sidebar-logo span { color:#C4B5FD; }
+  .sidebar-tag {
+    font-size:10px; color:rgba(255,255,255,0.35);
+    text-transform:uppercase; letter-spacing:.1em;
+    margin-top:4px; padding-left:42px;
+  }
+  .nav-section-label {
+    font-size:10px; font-weight:600; color:rgba(255,255,255,0.35);
+    text-transform:uppercase; letter-spacing:.1em;
+    padding:20px 20px 8px;
+  }
+  .nav-item {
+    display:flex; align-items:center; gap:10px;
+    padding:10px 20px; margin:2px 10px;
+    border-radius:var(--radius-sm);
+    font-size:14px; font-weight:500;
+    color:rgba(255,255,255,0.6);
+    transition:all .15s; cursor:pointer;
+    border:none; background:none; width:calc(100% - 20px);
+    text-align:left;
+  }
+  .nav-item:hover { background:rgba(255,255,255,0.07); color:#fff; }
+  .nav-item.active { background:var(--purple); color:#fff; }
+  .nav-item .nav-icon { font-size:17px; flex-shrink:0; }
+  .nav-badge {
+    margin-left:auto;
+    background:var(--red); color:#fff;
+    font-size:10px; font-weight:700;
+    padding:2px 7px; border-radius:100px;
+  }
+  .sidebar-footer {
+    margin-top:auto;
+    padding:16px 20px;
+    border-top:1px solid rgba(255,255,255,0.08);
+  }
+  .admin-info {
+    display:flex; align-items:center; gap:10px; margin-bottom:12px;
+  }
+  .admin-avatar {
+    width:34px; height:34px; border-radius:50%;
+    background:var(--purple); display:flex; align-items:center;
+    justify-content:center; font-size:13px; font-weight:700; color:#fff;
+  }
+  .admin-name { font-size:13px; font-weight:600; color:#fff; }
+  .admin-role { font-size:11px; color:rgba(255,255,255,0.45); }
+  .logout-btn {
+    width:100%; background:rgba(255,255,255,0.07); color:rgba(255,255,255,0.7);
+    padding:9px; border-radius:var(--radius-sm); border:none;
+    font-size:13px; font-weight:500; transition:all .2s;
+  }
+  .logout-btn:hover { background:var(--red); color:#fff; }
+
+  /* ── MAIN CONTENT ── */
+  #main {
+    margin-left:var(--sidebar-w);
+    min-height:100vh;
+    display:flex; flex-direction:column;
+  }
+
+  /* ── TOP BAR ── */
+  .topbar {
+    background:var(--white);
+    border-bottom:1px solid var(--gray-200);
+    padding:0 28px;
+    height:64px;
+    display:flex; align-items:center; justify-content:space-between;
+    position:sticky; top:0; z-index:50;
+  }
+  .topbar-left h2 { font-size:18px; color:var(--gray-900); }
+  .topbar-left p { font-size:13px; color:var(--gray-500); margin-top:1px; }
+  .topbar-right { display:flex; align-items:center; gap:12px; }
+  .topbar-btn {
+    display:flex; align-items:center; gap:6px;
+    background:var(--purple-soft); color:var(--purple);
+    padding:8px 16px; border-radius:var(--radius-sm);
+    font-size:13px; font-weight:600; border:none;
+    transition:all .2s;
+  }
+  .topbar-btn:hover { background:var(--purple-light); }
+  .topbar-btn.primary { background:var(--purple); color:#fff; }
+  .topbar-btn.primary:hover { background:var(--purple-dark); }
+
+  /* ── PAGES ── */
+  .page { display:none; padding:28px; }
+  .page.active { display:block; }
+
+  /* ── STAT CARDS ── */
+  .stats-row {
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(200px,1fr));
+    gap:16px; margin-bottom:24px;
+  }
+  .stat-card {
+    background:var(--white);
+    border:1.5px solid var(--gray-200);
+    border-radius:var(--radius);
+    padding:20px 22px;
+    transition:all .2s;
+  }
+  .stat-card:hover { border-color:var(--purple-mid); box-shadow:var(--shadow-sm); }
+  .stat-top { display:flex; align-items:center; justify-content:space-between; margin-bottom:12px; }
+  .stat-icon {
+    width:40px; height:40px; border-radius:var(--radius-sm);
+    display:flex; align-items:center; justify-content:center; font-size:20px;
+  }
+  .stat-change { font-size:12px; font-weight:600; padding:3px 8px; border-radius:100px; }
+  .stat-change.up { background:var(--green-light); color:var(--green); }
+  .stat-change.down { background:var(--red-light); color:var(--red); }
+  .stat-value { font-size:28px; font-weight:800; color:var(--gray-900); line-height:1; margin-bottom:4px; }
+  .stat-label { font-size:13px; color:var(--gray-500); }
+
+  /* ── TABLE ── */
+  .table-card {
+    background:var(--white);
+    border:1.5px solid var(--gray-200);
+    border-radius:var(--radius);
+    overflow:hidden;
+  }
+  .table-header {
+    padding:18px 22px;
+    border-bottom:1px solid var(--gray-200);
+    display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px;
+  }
+  .table-header h3 { font-size:16px; color:var(--gray-900); }
+  .search-input {
+    padding:8px 14px;
+    border:1.5px solid var(--gray-200); border-radius:var(--radius-sm);
+    font-size:13px; outline:none; min-width:200px;
+    transition:border-color .2s; font-family:'Inter',sans-serif;
+  }
+  .search-input:focus { border-color:var(--purple); }
+  table { width:100%; border-collapse:collapse; }
+  thead { background:var(--gray-50); }
+  th {
+    padding:11px 16px; text-align:left;
+    font-size:12px; font-weight:600; color:var(--gray-500);
+    text-transform:uppercase; letter-spacing:.05em;
+    border-bottom:1px solid var(--gray-200);
+  }
+  td {
+    padding:14px 16px;
+    font-size:14px; color:var(--gray-700);
+    border-bottom:1px solid var(--gray-100);
+    vertical-align:middle;
+  }
+  tr:last-child td { border-bottom:none; }
+  tr:hover td { background:var(--gray-50); }
+  .badge {
+    display:inline-block;
+    padding:3px 10px; border-radius:100px;
+    font-size:11px; font-weight:600;
+  }
+  .badge-green { background:var(--green-light); color:var(--green); }
+  .badge-amber { background:var(--amber-light); color:var(--amber); }
+  .badge-red { background:var(--red-light); color:var(--red); }
+  .badge-blue { background:var(--blue-light); color:var(--blue); }
+  .badge-purple { background:var(--purple-light); color:var(--purple); }
+  .action-btn {
+    padding:5px 12px; border-radius:6px; border:1.5px solid var(--gray-200);
+    font-size:12px; font-weight:600; background:var(--white);
+    color:var(--gray-600); transition:all .15s; margin-right:4px;
+  }
+  .action-btn:hover { border-color:var(--purple); color:var(--purple); }
+  .action-btn.danger:hover { border-color:var(--red); color:var(--red); }
+
+  /* ── PRODUCT FORM ── */
+  .form-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+  .form-full { grid-column:1/-1; }
+  .pg-label { display:block; font-size:13px; font-weight:600; color:var(--gray-700); margin-bottom:6px; }
+  .pg-input, .pg-select, .pg-textarea {
+    width:100%; padding:11px 14px;
+    border:1.5px solid var(--gray-200); border-radius:var(--radius-sm);
+    font-size:14px; outline:none;
+    transition:border-color .2s; font-family:'Inter',sans-serif;
+    background:var(--white); color:var(--gray-800);
+  }
+  .pg-input:focus, .pg-select:focus, .pg-textarea:focus { border-color:var(--purple); }
+  .pg-textarea { height:90px; resize:vertical; }
+  .form-actions { display:flex; gap:10px; justify-content:flex-end; margin-top:20px; }
+  .btn-save { background:var(--purple); color:#fff; padding:10px 24px; border-radius:var(--radius-sm); border:none; font-size:14px; font-weight:600; transition:background .2s; }
+  .btn-save:hover { background:var(--purple-dark); }
+  .btn-cancel { background:var(--white); color:var(--gray-600); padding:10px 20px; border-radius:var(--radius-sm); border:1.5px solid var(--gray-200); font-size:14px; font-weight:500; transition:all .2s; }
+  .btn-cancel:hover { border-color:var(--gray-400); }
+
+  /* ── MODAL ── */
+  .modal-overlay {
+    display:none; position:fixed; inset:0;
+    background:rgba(0,0,0,0.45); z-index:200;
+    align-items:center; justify-content:center; padding:20px;
+  }
+  .modal-overlay.open { display:flex; }
+  .modal {
+    background:var(--white); border-radius:var(--radius-lg);
+    padding:32px; width:100%; max-width:560px;
+    max-height:90vh; overflow-y:auto;
+    box-shadow:0 24px 64px rgba(0,0,0,0.2);
+  }
+  .modal-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:24px; }
+  .modal-header h3 { font-size:20px; }
+  .modal-close { background:none; border:none; font-size:22px; color:var(--gray-400); cursor:pointer; padding:4px; }
+  .modal-close:hover { color:var(--gray-700); }
+
+  /* ── SETTINGS ── */
+  .settings-section { background:var(--white); border:1.5px solid var(--gray-200); border-radius:var(--radius); padding:24px; margin-bottom:20px; }
+  .settings-section h4 { font-size:15px; font-weight:700; margin-bottom:4px; }
+  .settings-section p { font-size:13px; color:var(--gray-500); margin-bottom:20px; }
+  .settings-row { display:flex; align-items:center; justify-content:space-between; padding:14px 0; border-bottom:1px solid var(--gray-100); }
+  .settings-row:last-child { border-bottom:none; }
+  .settings-row label { font-size:14px; font-weight:500; }
+  .settings-row span { font-size:12px; color:var(--gray-500); display:block; margin-top:2px; }
+  .toggle { position:relative; width:44px; height:24px; cursor:pointer; }
+  .toggle input { opacity:0; width:0; height:0; }
+  .toggle-slider {
+    position:absolute; inset:0;
+    background:var(--gray-300); border-radius:100px;
+    transition:background .2s;
+  }
+  .toggle-slider::before {
+    content:''; position:absolute;
+    width:18px; height:18px; left:3px; top:3px;
+    background:#fff; border-radius:50%;
+    transition:transform .2s;
+  }
+  .toggle input:checked + .toggle-slider { background:var(--purple); }
+  .toggle input:checked + .toggle-slider::before { transform:translateX(20px); }
+
+  /* ── CHARTS MINI ── */
+  .chart-row { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:24px; }
+  .chart-card { background:var(--white); border:1.5px solid var(--gray-200); border-radius:var(--radius); padding:20px; }
+  .chart-card h4 { font-size:14px; font-weight:700; margin-bottom:16px; color:var(--gray-700); }
+  .bar-chart { display:flex; align-items:flex-end; gap:8px; height:100px; }
+  .bar-wrap { display:flex; flex-direction:column; align-items:center; gap:4px; flex:1; }
+  .bar { width:100%; background:var(--purple-light); border-radius:4px 4px 0 0; transition:height .5s; position:relative; }
+  .bar:hover { background:var(--purple); }
+  .bar-label { font-size:10px; color:var(--gray-400); }
+  .pie-wrap { display:flex; gap:20px; align-items:center; }
+  .pie-legend { display:flex; flex-direction:column; gap:8px; }
+  .pie-item { display:flex; align-items:center; gap:8px; font-size:13px; color:var(--gray-600); }
+  .pie-dot { width:10px; height:10px; border-radius:50%; flex-shrink:0; }
+
+  /* ── ENQUIRIES ── */
+  .enquiry-card {
+    background:var(--white); border:1.5px solid var(--gray-200);
+    border-radius:var(--radius); padding:18px 20px;
+    margin-bottom:12px; transition:all .2s;
+  }
+  .enquiry-card:hover { border-color:var(--purple-mid); }
+  .enquiry-top { display:flex; align-items:flex-start; justify-content:space-between; margin-bottom:8px; }
+  .enquiry-name { font-size:14px; font-weight:700; color:var(--gray-900); }
+  .enquiry-time { font-size:12px; color:var(--gray-400); }
+  .enquiry-product { font-size:13px; color:var(--purple); font-weight:500; margin-bottom:6px; }
+  .enquiry-msg { font-size:13px; color:var(--gray-600); line-height:1.6; }
+  .enquiry-actions { display:flex; gap:8px; margin-top:12px; }
+  .ea-btn {
+    padding:6px 14px; border-radius:var(--radius-sm); border:none;
+    font-size:12px; font-weight:600; transition:all .2s;
+  }
+  .ea-wa { background:#25D366; color:#fff; }
+  .ea-wa:hover { background:#1ebe5c; }
+  .ea-mark { background:var(--purple-light); color:var(--purple); }
+  .ea-mark:hover { background:var(--purple-light); }
+  .ea-del { background:var(--red-light); color:var(--red); }
+  .ea-del:hover { background:#fca5a5; }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════ LOGIN ═══════════════════════ -->
+<div id="login-screen">
+  <div class="login-card">
+    <div class="login-logo">
+      <div class="login-logo-icon">📱</div>
+      Philips <span>Gadget</span>
+    </div>
+    <div class="login-sub">Admin Dashboard — Restricted Access</div>
+    <div class="login-badge">🔒 Authorised Personnel Only</div>
+
+    <div class="form-group">
+      <label>Admin Username</label>
+      <input type="text" id="login-user" placeholder="Enter username" autocomplete="off">
+    </div>
+    <div class="form-group">
+      <label>Password</label>
+      <input type="password" id="login-pass" placeholder="Enter password" onkeydown="if(event.key==='Enter') doLogin()">
+    </div>
+    <button class="login-btn" onclick="doLogin()">Sign In →</button>
+    <div id="login-error">❌ Incorrect username or password.</div>
+
+    <p style="font-size:12px; color:var(--gray-400); text-align:center; margin-top:20px;">Default: admin / philips2025</p>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════ APP ═══════════════════════ -->
+<div id="app">
+
+  <!-- SIDEBAR -->
+  <aside id="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-logo">
+        <div class="sidebar-logo-icon">📱</div>
+        Philips <span>Gadget</span>
+      </div>
+      <div class="sidebar-tag">Admin Panel</div>
+    </div>
+
+    <div class="nav-section-label">Main</div>
+    <button class="nav-item active" onclick="showPage('dashboard', this)">
+      <span class="nav-icon">📊</span> Dashboard
+    </button>
+    <button class="nav-item" onclick="showPage('orders', this)">
+      <span class="nav-icon">📦</span> Orders
+      <span class="nav-badge" id="orders-badge">3</span>
+    </button>
+    <button class="nav-item" onclick="showPage('enquiries', this)">
+      <span class="nav-icon">💬</span> Enquiries
+      <span class="nav-badge" id="enq-badge">5</span>
+    </button>
+
+    <div class="nav-section-label">Catalogue</div>
+    <button class="nav-item" onclick="showPage('products', this)">
+      <span class="nav-icon">📱</span> Products
+    </button>
+    <button class="nav-item" onclick="showPage('categories', this)">
+      <span class="nav-icon">🗂️</span> Categories
+    </button>
+    <button class="nav-item" onclick="showPage('inventory', this)">
+      <span class="nav-icon">📋</span> Inventory
+    </button>
+
+    <div class="nav-section-label">Customers</div>
+    <button class="nav-item" onclick="showPage('customers', this)">
+      <span class="nav-icon">👥</span> Customers
+    </button>
+    <button class="nav-item" onclick="showPage('reviews', this)">
+      <span class="nav-icon">⭐</span> Reviews
+    </button>
+
+    <div class="nav-section-label">System</div>
+    <button class="nav-item" onclick="showPage('settings', this)">
+      <span class="nav-icon">⚙️</span> Settings
+    </button>
+    <button class="nav-item" onclick="window.open('index.html','_blank')">
+      <span class="nav-icon">🌐</span> View Website
+    </button>
+
+    <div class="sidebar-footer">
+      <div class="admin-info">
+        <div class="admin-avatar">PJ</div>
+        <div>
+          <div class="admin-name">Philip Isah J.</div>
+          <div class="admin-role">Super Admin</div>
+        </div>
+      </div>
+      <button class="logout-btn" onclick="doLogout()">Sign Out</button>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main id="main">
+
+    <!-- TOPBAR -->
+    <div class="topbar">
+      <div class="topbar-left">
+        <h2 id="page-title">Dashboard</h2>
+        <p id="page-sub">Welcome back, Philip. Here's what's happening today.</p>
+      </div>
+      <div class="topbar-right">
+        <button class="topbar-btn" onclick="syncSheets()">🔄 Sync Sheets</button>
+        <button class="topbar-btn primary" onclick="openModal('add-product')">+ Add Product</button>
+      </div>
+    </div>
+
+
+    <!-- ════════════ DASHBOARD PAGE ════════════ -->
+    <div class="page active" id="page-dashboard">
+      <div id="live-data-banner" style="display:none; background:var(--green-light); color:var(--green); padding:10px 16px; border-radius:var(--radius-sm); font-size:13px; font-weight:600; margin-bottom:16px;">
+        🟢 Connected — showing live activity from the website
+      </div>
+      <div id="demo-data-banner" style="background:var(--amber-light); color:var(--amber); padding:10px 16px; border-radius:var(--radius-sm); font-size:13px; font-weight:600; margin-bottom:16px;">
+        ⚠️ Not connected to live data yet. Orders, Customers, and Reviews below are sample/demo data. Add your Apps Script URL in Settings to track real Enquiries and Searches from the website.
+      </div>
+      <div class="stats-row">
+        <div class="stat-card">
+          <div class="stat-top">
+            <div class="stat-icon" style="background:var(--purple-light);">📦</div>
+            <span class="stat-change up">+12%</span>
+          </div>
+          <div class="stat-value">47</div>
+          <div class="stat-label">Total Orders This Month <span style="font-weight:400;font-size:10px;color:var(--gray-400);">(demo)</span></div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-top">
+            <div class="stat-icon" style="background:var(--green-light);">💰</div>
+            <span class="stat-change up">+8%</span>
+          </div>
+          <div class="stat-value">₦4.2M</div>
+          <div class="stat-label">Revenue This Month <span style="font-weight:400;font-size:10px;color:var(--gray-400);">(demo)</span></div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-top">
+            <div class="stat-icon" style="background:var(--blue-light);">🔍</div>
+            <span class="stat-change up" id="searches-change">—</span>
+          </div>
+          <div class="stat-value" id="total-searches-value">0</div>
+          <div class="stat-label">Website Searches</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-top">
+            <div class="stat-icon" style="background:var(--amber-light);">💬</div>
+            <span class="stat-change down" id="enquiries-change">—</span>
+          </div>
+          <div class="stat-value" id="total-enquiries-value">0</div>
+          <div class="stat-label">Website Enquiries</div>
+        </div>
+      </div>
+
+      <div class="chart-row">
+        <div class="chart-card">
+          <h4>Enquiries — Last 6 Months</h4>
+          <div class="bar-chart" id="orders-chart"></div>
+        </div>
+        <div class="chart-card">
+          <h4>Top Searched Terms</h4>
+          <div id="top-searches-list" style="display:flex; flex-direction:column; gap:10px; margin-top:8px;">
+            <p style="font-size:13px; color:var(--gray-500);">No search data yet.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Recent Orders -->
+      <div class="table-card">
+        <div class="table-header">
+          <h3>Recent Orders</h3>
+          <button class="topbar-btn" onclick="showPage('orders', document.querySelector('.nav-item:nth-child(3)'))">View All</button>
+        </div>
+        <table>
+          <thead>
+            <tr><th>Order ID</th><th>Customer</th><th>Product</th><th>Amount</th><th>Status</th><th>Date</th><th>Action</th></tr>
+          </thead>
+          <tbody id="recent-orders-body"></tbody>
+        </table>
+      </div>
+    </div>
+
+
+    <!-- ════════════ ORDERS PAGE ════════════ -->
+    <div class="page" id="page-orders">
+      <div class="table-card">
+        <div class="table-header">
+          <h3>All Orders</h3>
+          <input class="search-input" placeholder="🔍 Search orders…" oninput="filterTable('orders-table', this.value)">
+        </div>
+        <table id="orders-table">
+          <thead>
+            <tr><th>Order ID</th><th>Customer</th><th>Phone</th><th>Product</th><th>Amount</th><th>Status</th><th>Date</th><th>Actions</th></tr>
+          </thead>
+          <tbody id="orders-body"></tbody>
+        </table>
+      </div>
+    </div>
+
+
+    <!-- ════════════ ENQUIRIES PAGE ════════════ -->
+    <div class="page" id="page-enquiries">
+      <div style="margin-bottom:16px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px;">
+        <div>
+          <h3 style="font-size:16px;">Website Enquiries</h3>
+          <p style="font-size:13px; color:var(--gray-500); margin-top:2px;">"Order via WhatsApp" clicks and product requests from visitors on the live site.</p>
+        </div>
+        <input class="search-input" placeholder="🔍 Search enquiries…">
+      </div>
+      <div id="enquiries-list"></div>
+    </div>
+
+
+    <!-- ════════════ PRODUCTS PAGE ════════════ -->
+    <div class="page" id="page-products">
+      <div class="table-card">
+        <div class="table-header">
+          <h3>Product Catalogue</h3>
+          <div style="display:flex; gap:10px;">
+            <input class="search-input" placeholder="🔍 Search products…" oninput="filterTable('products-table', this.value)">
+            <button class="topbar-btn primary" onclick="openModal('add-product')">+ Add Product</button>
+          </div>
+        </div>
+        <table id="products-table">
+          <thead>
+            <tr><th>Product</th><th>Brand</th><th>Category</th><th>Price</th><th>Stock</th><th>Status</th><th>Actions</th></tr>
+          </thead>
+          <tbody id="products-body"></tbody>
+        </table>
+      </div>
+    </div>
+
+
+    <!-- ════════════ INVENTORY PAGE ════════════ -->
+    <div class="page" id="page-inventory">
+      <div class="table-card">
+        <div class="table-header">
+          <h3>Inventory Management</h3>
+          <input class="search-input" placeholder="🔍 Search inventory…">
+        </div>
+        <table>
+          <thead>
+            <tr><th>Product</th><th>SKU</th><th>In Stock</th><th>Sold</th><th>Reorder Level</th><th>Status</th><th>Update</th></tr>
+          </thead>
+          <tbody id="inventory-body"></tbody>
+        </table>
+      </div>
+    </div>
+
+
+    <!-- ════════════ CUSTOMERS PAGE ════════════ -->
+    <div class="page" id="page-customers">
+      <div class="table-card">
+        <div class="table-header">
+          <h3>Customer Database</h3>
+          <input class="search-input" placeholder="🔍 Search customers…" oninput="filterTable('customers-table', this.value)">
+        </div>
+        <table id="customers-table">
+          <thead>
+            <tr><th>Name</th><th>Phone/WhatsApp</th><th>State</th><th>Orders</th><th>Total Spent</th><th>Last Order</th><th>Action</th></tr>
+          </thead>
+          <tbody id="customers-body"></tbody>
+        </table>
+      </div>
+    </div>
+
+
+    <!-- ════════════ REVIEWS PAGE ════════════ -->
+    <div class="page" id="page-reviews">
+      <div class="table-card">
+        <div class="table-header"><h3>Customer Reviews</h3></div>
+        <table>
+          <thead><tr><th>Customer</th><th>Product</th><th>Rating</th><th>Review</th><th>Date</th><th>Status</th><th>Action</th></tr></thead>
+          <tbody id="reviews-body"></tbody>
+        </table>
+      </div>
+    </div>
+
+
+    <!-- ════════════ CATEGORIES PAGE ════════════ -->
+    <div class="page" id="page-categories">
+      <div class="table-card">
+        <div class="table-header">
+          <h3>Product Categories</h3>
+          <button class="topbar-btn primary">+ Add Category</button>
+        </div>
+        <table>
+          <thead><tr><th>Category</th><th>Emoji</th><th>Products</th><th>Visible</th><th>Actions</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Smartphones</strong></td><td>📱</td><td>48</td><td><span class="badge badge-green">Visible</span></td><td><button class="action-btn">Edit</button></td></tr>
+            <tr><td><strong>Laptops</strong></td><td>💻</td><td>22</td><td><span class="badge badge-green">Visible</span></td><td><button class="action-btn">Edit</button></td></tr>
+            <tr><td><strong>Tablets</strong></td><td>📟</td><td>14</td><td><span class="badge badge-green">Visible</span></td><td><button class="action-btn">Edit</button></td></tr>
+            <tr><td><strong>Accessories</strong></td><td>🎧</td><td>67</td><td><span class="badge badge-green">Visible</span></td><td><button class="action-btn">Edit</button></td></tr>
+            <tr><td><strong>Smartwatches</strong></td><td>⌚</td><td>18</td><td><span class="badge badge-green">Visible</span></td><td><button class="action-btn">Edit</button></td></tr>
+            <tr><td><strong>Audio Devices</strong></td><td>🔊</td><td>31</td><td><span class="badge badge-green">Visible</span></td><td><button class="action-btn">Edit</button></td></tr>
+            <tr><td><strong>Gaming Devices</strong></td><td>🎮</td><td>9</td><td><span class="badge badge-amber">Hidden</span></td><td><button class="action-btn">Edit</button></td></tr>
+            <tr><td><strong>Power Banks</strong></td><td>🔋</td><td>25</td><td><span class="badge badge-green">Visible</span></td><td><button class="action-btn">Edit</button></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+
+    <!-- ════════════ SETTINGS PAGE ════════════ -->
+    <div class="page" id="page-settings">
+      <div class="settings-section">
+        <h4>Store Information</h4>
+        <p>Update basic details about Philips Gadget.</p>
+        <div class="form-grid">
+          <div><label class="pg-label">Store Name</label><input class="pg-input" value="Philips Gadget"></div>
+          <div><label class="pg-label">WhatsApp Number</label><input class="pg-input" value="+234 813 295 1111"></div>
+          <div><label class="pg-label">Location 1</label><input class="pg-input" value="Pleasure Bus Stop, Abule Egba"></div>
+          <div><label class="pg-label">Location 2</label><input class="pg-input" value="Computer Village, Ikeja"></div>
+        </div>
+        <div class="form-actions"><button class="btn-save">Save Changes</button></div>
+      </div>
+
+      <div class="settings-section">
+        <h4>Google Sheets Integration</h4>
+        <p>Connect your Google Apps Script Web App to track real website activity — search queries and "Order via WhatsApp" clicks from visitors. This same URL must also be pasted into the <code>TRACKING_URL</code> constant near the top of <code>index.html</code> on the live site.</p>
+        <div class="form-grid">
+          <div class="form-full"><label class="pg-label">Apps Script Web App URL</label><input class="pg-input" id="sheets-url" placeholder="https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec"></div>
+        </div>
+        <div class="form-actions">
+          <button class="btn-cancel" onclick="testSheetsConnection()">Test Connection</button>
+          <button class="btn-save" onclick="saveSheetsUrl()">Save URL</button>
+        </div>
+        <div id="sheets-status" style="margin-top:12px; font-size:13px;"></div>
+      </div>
+
+      <div class="settings-section">
+        <h4>Admin Credentials</h4>
+        <p>Change your admin login password.</p>
+        <div class="form-grid">
+          <div><label class="pg-label">Current Password</label><input type="password" class="pg-input" placeholder="••••••••"></div>
+          <div><label class="pg-label">New Password</label><input type="password" class="pg-input" placeholder="••••••••"></div>
+        </div>
+        <div class="form-actions"><button class="btn-save">Update Password</button></div>
+      </div>
+
+      <div class="settings-section">
+        <h4>Notifications & Features</h4>
+        <p>Toggle features and notification preferences.</p>
+        <div class="settings-row">
+          <div><label>New Order Alerts</label><span>Notify when a new WhatsApp order comes in</span></div>
+          <label class="toggle"><input type="checkbox" checked><span class="toggle-slider"></span></label>
+        </div>
+        <div class="settings-row">
+          <div><label>Show Out-of-Stock Products</label><span>Display products with zero stock on website</span></div>
+          <label class="toggle"><input type="checkbox"><span class="toggle-slider"></span></label>
+        </div>
+        <div class="settings-row">
+          <div><label>Auto-Sync to Google Sheets</label><span>Sync data every 30 minutes automatically</span></div>
+          <label class="toggle"><input type="checkbox" checked><span class="toggle-slider"></span></label>
+        </div>
+        <div class="settings-row">
+          <div><label>Maintenance Mode</label><span>Show a "coming back soon" page to visitors</span></div>
+          <label class="toggle"><input type="checkbox"><span class="toggle-slider"></span></label>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+
+<!-- ════════════ ADD PRODUCT MODAL ════════════ -->
+<div class="modal-overlay" id="modal-add-product">
+  <div class="modal">
+    <div class="modal-header">
+      <h3>Add New Product</h3>
+      <button class="modal-close" onclick="closeModal('add-product')">✕</button>
+    </div>
+    <div class="form-grid">
+      <div><label class="pg-label">Product Name *</label><input class="pg-input" id="p-name" placeholder="e.g. iPhone 15 Pro Max 256GB"></div>
+      <div><label class="pg-label">Brand *</label>
+        <select class="pg-select" id="p-brand">
+          <option>Apple</option><option>Samsung</option><option>Tecno</option>
+          <option>Infinix</option><option>Xiaomi</option><option>Oraimo</option>
+          <option>JBL</option><option>HP</option><option>Lenovo</option><option>Other</option>
+        </select>
+      </div>
+      <div><label class="pg-label">Category *</label>
+        <select class="pg-select" id="p-cat">
+          <option>Smartphones</option><option>Laptops</option><option>Tablets</option>
+          <option>Accessories</option><option>Smartwatches</option>
+          <option>Audio Devices</option><option>Gaming Devices</option><option>Power Banks</option>
+        </select>
+      </div>
+      <div><label class="pg-label">Price (₦)</label><input class="pg-input" id="p-price" placeholder="e.g. 850000"></div>
+      <div><label class="pg-label">Old Price (₦) – optional</label><input class="pg-input" id="p-oldprice" placeholder="e.g. 950000"></div>
+      <div><label class="pg-label">Stock Quantity</label><input class="pg-input" id="p-stock" type="number" placeholder="e.g. 10"></div>
+      <div><label class="pg-label">Badge</label>
+        <select class="pg-select" id="p-badge">
+          <option value="">None</option><option>New</option><option>Hot</option><option>Sale</option>
+        </select>
+      </div>
+      <div><label class="pg-label">Emoji Icon</label><input class="pg-input" id="p-emoji" placeholder="e.g. 📱 💻 🎧"></div>
+      <div class="form-full"><label class="pg-label">Description</label><textarea class="pg-textarea" id="p-desc" placeholder="Brief product description…"></textarea></div>
+      <div class="form-full"><label class="pg-label">WhatsApp Pre-filled Message</label><input class="pg-input" id="p-wa" placeholder="Hi, I'm interested in this product…"></div>
+    </div>
+    <div class="form-actions">
+      <button class="btn-cancel" onclick="closeModal('add-product')">Cancel</button>
+      <button class="btn-save" onclick="saveProduct()">Save Product</button>
+    </div>
+  </div>
+</div>
+
+
+<script>
+// ── AUTH ──────────────────────────────────────
+const ADMIN_USER = 'admin';
+const ADMIN_PASS = 'philips2025';
+
+function doLogin() {
+  const u = document.getElementById('login-user').value.trim();
+  const p = document.getElementById('login-pass').value.trim();
+  if (u === ADMIN_USER && p === ADMIN_PASS) {
+    document.getElementById('login-screen').style.display = 'none';
+    document.getElementById('app').style.display = 'flex';
+    initDashboard();
+  } else {
+    document.getElementById('login-error').style.display = 'block';
+  }
+}
+function doLogout() {
+  if (confirm('Sign out of the admin panel?')) {
+    document.getElementById('app').style.display = 'none';
+    document.getElementById('login-screen').style.display = 'flex';
+    document.getElementById('login-user').value = '';
+    document.getElementById('login-pass').value = '';
+  }
+}
+
+// ── NAVIGATION ────────────────────────────────
+const pageTitles = {
+  dashboard: ['Dashboard', 'Welcome back, Philip. Here\'s what\'s happening today.'],
+  orders: ['Orders', 'Manage and track all incoming orders.'],
+  enquiries: ['Enquiries', 'Customer messages from the website contact form.'],
+  products: ['Products', 'Manage your product catalogue.'],
+  categories: ['Categories', 'Organise products into categories.'],
+  inventory: ['Inventory', 'Track stock levels and reorder points.'],
+  customers: ['Customers', 'View and manage your customer database.'],
+  reviews: ['Reviews', 'Moderate customer reviews.'],
+  settings: ['Settings', 'Configure your store and integrations.'],
+};
+
+function showPage(name, btn) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  document.getElementById('page-' + name).classList.add('active');
+  if (btn) btn.classList.add('active');
+  const t = pageTitles[name] || [name, ''];
+  document.getElementById('page-title').textContent = t[0];
+  document.getElementById('page-sub').textContent = t[1];
+}
+
+// ── SAMPLE DATA ───────────────────────────────
+const sampleOrders = [
+  { id:'PG-0047', customer:'Chukwuemeka Eze', phone:'08031234567', product:'iPhone 14 Pro', amount:'₦780,000', status:'delivered', date:'Jun 8, 2025' },
+  { id:'PG-0046', customer:'Amina Yusuf', phone:'08057654321', product:'Samsung S24', amount:'₦650,000', status:'shipped', date:'Jun 8, 2025' },
+  { id:'PG-0045', customer:'Bola Adeyemi', phone:'08012345678', product:'Tecno Camon 30', amount:'₦210,000', status:'pending', date:'Jun 7, 2025' },
+  { id:'PG-0044', customer:'Ngozi Okonkwo', phone:'08023456789', product:'AirPods Pro', amount:'₦185,000', status:'delivered', date:'Jun 6, 2025' },
+  { id:'PG-0043', customer:'David Obi', phone:'09011111111', product:'HP Laptop 15', amount:'₦420,000', status:'processing', date:'Jun 5, 2025' },
+  { id:'PG-0042', customer:'Fatimah Sule', phone:'08098765432', product:'Xiaomi 14', amount:'₦490,000', status:'delivered', date:'Jun 4, 2025' },
+];
+
+const sampleProducts = [
+  { name:'iPhone 15 Pro Max', brand:'Apple', cat:'Smartphones', price:'₦1,200,000', stock:4, status:'active' },
+  { name:'Samsung Galaxy S24 Ultra', brand:'Samsung', cat:'Smartphones', price:'₦950,000', stock:7, status:'active' },
+  { name:'iPhone 14', brand:'Apple', cat:'Smartphones', price:'₦680,000', stock:2, status:'low' },
+  { name:'Tecno Camon 30 Pro', brand:'Tecno', cat:'Smartphones', price:'₦210,000', stock:18, status:'active' },
+  { name:'Infinix Note 40 Pro', brand:'Infinix', cat:'Smartphones', price:'₦185,000', stock:12, status:'active' },
+  { name:'HP Laptop 15s', brand:'HP', cat:'Laptops', price:'₦420,000', stock:5, status:'active' },
+  { name:'JBL Flip 6', brand:'JBL', cat:'Audio Devices', price:'₦85,000', stock:0, status:'out' },
+  { name:'Oraimo FreePods 4', brand:'Oraimo', cat:'Accessories', price:'₦18,000', stock:34, status:'active' },
+];
+
+const sampleCustomers = [
+  { name:'Chukwuemeka Eze', phone:'08031234567', state:'Lagos', orders:3, spent:'₦1,540,000', last:'Jun 8, 2025' },
+  { name:'Amina Yusuf', phone:'08057654321', state:'Abuja', orders:2, spent:'₦1,100,000', last:'Jun 8, 2025' },
+  { name:'Bola Adeyemi', phone:'08012345678', state:'Ibadan', orders:1, spent:'₦210,000', last:'Jun 7, 2025' },
+  { name:'Ngozi Okonkwo', phone:'08023456789', state:'Enugu', orders:4, spent:'₦920,000', last:'Jun 6, 2025' },
+  { name:'David Obi', phone:'09011111111', state:'Port Harcourt', orders:2, spent:'₦860,000', last:'Jun 5, 2025' },
+];
+
+const sampleEnquiries = [
+  { name:'Taiwo Afolabi', phone:'08091234567', product:'iPhone 15 Pro Max', msg:'Please how much is iPhone 15 Pro Max 512GB? Is it original? I want to order today.', time:'2 hours ago', status:'new' },
+  { name:'Emeka Chibuike', phone:'07031234567', product:'Samsung S24 Ultra', msg:'Do you have Samsung S24 Ultra in Titanium Gray? What is the warranty period?', time:'5 hours ago', status:'new' },
+  { name:'Blessing Okonkwo', phone:'09087654321', product:'Laptops', msg:'I need a good laptop for graphics design under ₦400,000. What do you recommend?', time:'Yesterday', status:'pending' },
+  { name:'Ibrahim Hassan', phone:'08011112222', product:'Infinix Hot 10', msg:'I ordered last week and the phone arrived safely. Just wanted to say thank you for the prompt delivery!', time:'2 days ago', status:'resolved' },
+  { name:'Chioma Nwosu', phone:'08065432198', product:'JBL Speaker', msg:'Is the JBL Flip 6 back in stock? I have been waiting for it. Please notify me when available.', time:'3 days ago', status:'pending' },
+];
+
+const sampleInventory = [
+  { name:'iPhone 15 Pro Max', sku:'APL-IP15PM', stock:4, sold:23, reorder:5, status:'low' },
+  { name:'Samsung Galaxy S24 Ultra', sku:'SAM-S24U', stock:7, sold:18, reorder:5, status:'ok' },
+  { name:'iPhone 14', sku:'APL-IP14', stock:2, sold:41, reorder:5, status:'low' },
+  { name:'Tecno Camon 30 Pro', sku:'TCN-C30P', stock:18, sold:67, reorder:10, status:'ok' },
+  { name:'JBL Flip 6', sku:'JBL-F6', stock:0, sold:29, reorder:5, status:'out' },
+  { name:'Oraimo FreePods 4', sku:'ORA-FP4', stock:34, sold:112, reorder:10, status:'ok' },
+];
+
+const sampleReviews = [
+  { customer:'Mr. Kunle', product:'iPhone 12 Pro Max', rating:5, review:'First time I bought something peacefully without going to the store.', date:'Mar 2025', status:'approved' },
+  { customer:'Mr. Samuel', product:'Samsung A53 5G', rating:5, review:'7 months in and resold for same price. Quality speaks.', date:'Jan 2025', status:'approved' },
+  { customer:'Mr. Nelson', product:'Vista Tablet', rating:5, review:'Delivery was premium and timely. Very impressed.', date:'Feb 2025', status:'approved' },
+  { customer:'Mr. Ibrahim', product:'Infinix Hot 10', rating:5, review:'Battery life is amazing. Love this phone.', date:'Jun 2025', status:'pending' },
+  { customer:'Mrs. Ifeoma', product:'TECNO Pop 10 Pro', rating:5, review:'Been using for over a year. Reliable every day.', date:'Jun 2024', status:'approved' },
+];
+
+// ── STATUS BADGE HELPER ───────────────────────
+function statusBadge(s) {
+  const map = {
+    delivered:'badge-green',shipped:'badge-blue',pending:'badge-amber',
+    processing:'badge-purple',cancelled:'badge-red',
+    active:'badge-green',low:'badge-amber',out:'badge-red',
+    ok:'badge-green',new:'badge-purple',resolved:'badge-green',
+    approved:'badge-green',
+  };
+  return `<span class="badge ${map[s]||'badge-amber'}">${s.charAt(0).toUpperCase()+s.slice(1)}</span>`;
+}
+
+// ── RENDER TABLES ─────────────────────────────
+function renderOrders(list, bodyId, showPhone) {
+  const body = document.getElementById(bodyId);
+  if (!body) return;
+  body.innerHTML = list.map(o => `
+    <tr>
+      <td><strong>${o.id}</strong></td>
+      <td>${o.customer}</td>
+      ${showPhone ? `<td>${o.phone}</td>` : ''}
+      <td>${o.product}</td>
+      <td><strong>${o.amount}</strong></td>
+      <td>${statusBadge(o.status)}</td>
+      <td>${o.date}</td>
+      <td>
+        <button class="action-btn" onclick="waContact('${o.phone}','${o.product}')">WhatsApp</button>
+        <select class="action-btn" style="padding:5px 8px;" onchange="updateStatus('${o.id}',this.value)">
+          <option>Update…</option>
+          <option value="pending">Pending</option>
+          <option value="processing">Processing</option>
+          <option value="shipped">Shipped</option>
+          <option value="delivered">Delivered</option>
+          <option value="cancelled">Cancelled</option>
+        </select>
+      </td>
+    </tr>
+  `).join('');
+}
+
+function renderProducts() {
+  const body = document.getElementById('products-body');
+  body.innerHTML = sampleProducts.map(p => `
+    <tr>
+      <td><strong>${p.name}</strong></td>
+      <td>${p.brand}</td>
+      <td>${p.cat}</td>
+      <td>${p.price}</td>
+      <td>${p.stock}</td>
+      <td>${statusBadge(p.status)}</td>
+      <td>
+        <button class="action-btn">Edit</button>
+        <button class="action-btn danger">Delete</button>
+      </td>
+    </tr>
+  `).join('');
+}
+
+function renderInventory() {
+  const body = document.getElementById('inventory-body');
+  body.innerHTML = sampleInventory.map(i => `
+    <tr>
+      <td><strong>${i.name}</strong></td>
+      <td style="font-family:monospace; font-size:12px;">${i.sku}</td>
+      <td><strong>${i.stock}</strong></td>
+      <td>${i.sold}</td>
+      <td>${i.reorder}</td>
+      <td>${statusBadge(i.status)}</td>
+      <td><input type="number" value="${i.stock}" style="width:70px; padding:5px 8px; border:1.5px solid var(--gray-200); border-radius:6px; font-size:13px;" min="0"> <button class="action-btn" style="margin-left:4px;">Save</button></td>
+    </tr>
+  `).join('');
+}
+
+function renderCustomers() {
+  const body = document.getElementById('customers-body');
+  body.innerHTML = sampleCustomers.map(c => `
+    <tr>
+      <td><strong>${c.name}</strong></td>
+      <td>${c.phone}</td>
+      <td>${c.state}</td>
+      <td>${c.orders}</td>
+      <td><strong>${c.spent}</strong></td>
+      <td>${c.last}</td>
+      <td><button class="action-btn" onclick="waContact('${c.phone}','')">WhatsApp</button></td>
+    </tr>
+  `).join('');
+}
+
+function renderEnquiries() {
+  const list = document.getElementById('enquiries-list');
+  if (window._liveEnquiries && window._liveEnquiries.length) {
+    list.innerHTML = window._liveEnquiries.map((e,i) => `
+      <div class="enquiry-card" id="enq-${i}">
+        <div class="enquiry-top">
+          <div>
+            <div class="enquiry-name">${(e.Type||'enquiry').replace(/_/g,' ')} ${statusBadge('new')}</div>
+            <div class="enquiry-product">Product: ${e.Product || '—'}</div>
+          </div>
+          <div class="enquiry-time">${formatTimestamp(e.Timestamp)}</div>
+        </div>
+        <div class="enquiry-msg">${e.Message || ''}</div>
+        <div class="enquiry-actions">
+          ${e.Product ? `<button class="ea-btn ea-wa" onclick="waContactProduct('${String(e.Product).replace(/'/g,"\\'")}')">💬 Reply on WhatsApp</button>` : ''}
+        </div>
+      </div>
+    `).join('');
+  } else if (window._liveDataConnected) {
+    list.innerHTML = `<p style="font-size:13px;color:var(--gray-500);padding:16px;">No enquiries logged yet. As visitors search and click "Order via WhatsApp" on the live site, they'll appear here.</p>`;
+  } else {
+    list.innerHTML = sampleEnquiries.map((e,i) => `
+      <div class="enquiry-card" id="enq-${i}">
+        <div class="enquiry-top">
+          <div>
+            <div class="enquiry-name">${e.name} · ${e.phone} ${statusBadge(e.status)} <span style="font-size:10px;color:var(--gray-400);font-weight:400;">(demo)</span></div>
+            <div class="enquiry-product">Asking about: ${e.product}</div>
+          </div>
+          <div class="enquiry-time">${e.time}</div>
+        </div>
+        <div class="enquiry-msg">${e.msg}</div>
+        <div class="enquiry-actions">
+          <button class="ea-btn ea-wa" onclick="waContact('${e.phone}','${e.product}')">💬 Reply on WhatsApp</button>
+          <button class="ea-btn ea-mark" onclick="markResolved(${i})">✓ Mark Resolved</button>
+          <button class="ea-btn ea-del" onclick="deleteEnquiry(${i})">Delete</button>
+        </div>
+      </div>
+    `).join('');
+  }
+}
+
+function formatTimestamp(ts) {
+  if (!ts) return '';
+  const d = new Date(ts);
+  if (isNaN(d.getTime())) return String(ts);
+  return d.toLocaleString('en-NG', { day:'numeric', month:'short', hour:'2-digit', minute:'2-digit' });
+}
+
+function waContactProduct(product) {
+  const msg = `Hi, this is Philip Gadgets admin following up on your enquiry about the ${product}.`;
+  window.open(`https://wa.me/2348132951111?text=${encodeURIComponent(msg)}`, '_blank');
+}
+
+
+function renderReviews() {
+  const body = document.getElementById('reviews-body');
+  body.innerHTML = sampleReviews.map(r => `
+    <tr>
+      <td>${r.customer}</td>
+      <td>${r.product}</td>
+      <td>${'★'.repeat(r.rating)}</td>
+      <td style="max-width:220px; white-space:normal; font-size:13px;">${r.review}</td>
+      <td>${r.date}</td>
+      <td>${statusBadge(r.status)}</td>
+      <td>
+        <button class="action-btn">Approve</button>
+        <button class="action-btn danger">Delete</button>
+      </td>
+    </tr>
+  `).join('');
+}
+
+// ── BAR CHART ─────────────────────────────────
+function renderBarChart() {
+  let data;
+  if (window._liveStats && window._liveStats.monthCounts && Object.keys(window._liveStats.monthCounts).length) {
+    data = Object.entries(window._liveStats.monthCounts).map(([m,v]) => ({m,v}));
+  } else {
+    data = [
+      {m:'Jan',v:28},{m:'Feb',v:35},{m:'Mar',v:31},{m:'Apr',v:42},{m:'May',v:38},{m:'Jun',v:47}
+    ];
+  }
+  const max = Math.max(...data.map(d=>d.v), 1);
+  document.getElementById('orders-chart').innerHTML = data.map(d => `
+    <div class="bar-wrap">
+      <div class="bar" style="height:${Math.round(d.v/max*90)}px;" title="${d.v} enquiries"></div>
+      <span class="bar-label">${d.m}</span>
+    </div>
+  `).join('');
+}
+
+function renderTopSearches() {
+  const el = document.getElementById('top-searches-list');
+  if (!el) return;
+  const top = (window._liveStats && window._liveStats.topSearches) || [];
+  if (!top.length) {
+    el.innerHTML = `<p style="font-size:13px; color:var(--gray-500);">No search data yet${window._liveDataConnected ? ' — check back once visitors start searching.' : '. Connect Google Sheets in Settings to see this.'}</p>`;
+    return;
+  }
+  const max = Math.max(...top.map(t => t.count), 1);
+  el.innerHTML = top.map(t => `
+    <div style="display:flex; align-items:center; gap:10px;">
+      <div style="flex:1; min-width:0;">
+        <div style="font-size:13px; font-weight:600; color:var(--gray-800); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${t.query}</div>
+        <div style="background:var(--purple-light); border-radius:4px; height:6px; margin-top:4px; overflow:hidden;">
+          <div style="background:var(--purple); height:100%; width:${Math.round(t.count/max*100)}%;"></div>
+        </div>
+      </div>
+      <div style="font-size:12px; font-weight:700; color:var(--purple); flex-shrink:0;">${t.count}</div>
+    </div>
+  `).join('');
+}
+
+// ── ACTIONS ───────────────────────────────────
+function waContact(phone, product) {
+  const msg = product ? `Hi, this is Philips Gadget admin following up on your ${product} enquiry.` : `Hi, this is Philips Gadget. How can we help you?`;
+  window.open(`https://wa.me/${phone.replace(/\D/g,'')}?text=${encodeURIComponent(msg)}`, '_blank');
+}
+
+function updateStatus(id, status) {
+  if (status !== 'Update…') alert(`Order ${id} updated to: ${status}`);
+}
+
+function markResolved(i) {
+  const el = document.getElementById('enq-'+i);
+  if (el) el.style.opacity = '0.5';
+  const badge = document.getElementById('enq-badge');
+  if (badge) badge.textContent = Math.max(0, parseInt(badge.textContent)-1);
+}
+
+function deleteEnquiry(i) {
+  if (confirm('Delete this enquiry?')) {
+    const el = document.getElementById('enq-'+i);
+    if (el) el.remove();
+  }
+}
+
+function filterTable(tableId, query) {
+  const rows = document.querySelectorAll('#'+tableId+' tbody tr');
+  const q = query.toLowerCase();
+  rows.forEach(r => { r.style.display = r.textContent.toLowerCase().includes(q) ? '' : 'none'; });
+}
+
+// ── MODAL ─────────────────────────────────────
+function openModal(name) {
+  document.getElementById('modal-'+name).classList.add('open');
+}
+function closeModal(name) {
+  document.getElementById('modal-'+name).classList.remove('open');
+}
+document.querySelectorAll('.modal-overlay').forEach(m => {
+  m.addEventListener('click', e => { if (e.target === m) m.classList.remove('open'); });
+});
+
+function saveProduct() {
+  const name = document.getElementById('p-name').value.trim();
+  if (!name) { alert('Please enter a product name.'); return; }
+  alert(`✅ Product "${name}" saved! In production, this would sync to Google Sheets.`);
+  closeModal('add-product');
+}
+
+// ── SHEETS SYNC ───────────────────────────────
+const SHEETS_URL_KEY = 'pg_admin_sheets_url';
+
+function getSheetsUrl() {
+  return localStorage.getItem(SHEETS_URL_KEY) || '';
+}
+
+function saveSheetsUrl() {
+  const url = document.getElementById('sheets-url').value.trim();
+  if (!url || url.includes('YOUR_SCRIPT_ID')) {
+    alert('⚠️ Please paste your deployed Apps Script Web App URL first.');
+    return;
+  }
+  localStorage.setItem(SHEETS_URL_KEY, url);
+  alert('✅ URL saved. Reloading live data…');
+  loadLiveData();
+}
+
+function syncSheets() {
+  loadLiveData(true);
+}
+
+function testSheetsConnection() {
+  const url = document.getElementById('sheets-url').value.trim();
+  const status = document.getElementById('sheets-status');
+  if (!url || url.includes('YOUR_SCRIPT_ID')) {
+    status.innerHTML = '<span style="color:var(--red);">❌ No valid URL entered.</span>';
+    return;
+  }
+  status.innerHTML = '<span style="color:var(--amber);">⏳ Testing connection…</span>';
+  fetch(`${url}?action=getStats`)
+    .then(r => r.json())
+    .then(data => {
+      if (data.success) {
+        status.innerHTML = `<span style="color:var(--green);">✅ Connection successful! Found ${data.data.totalEnquiries} enquiries and ${data.data.totalSearches} searches.</span>`;
+      } else {
+        status.innerHTML = `<span style="color:var(--red);">❌ Connected but got an error: ${data.error}</span>`;
+      }
+    })
+    .catch(err => {
+      status.innerHTML = `<span style="color:var(--red);">❌ Could not reach this URL. Make sure it's deployed with "Anyone" access. (${err})</span>`;
+    });
+}
+
+// ── LIVE DATA LOADING ─────────────────────────
+window._liveDataConnected = false;
+window._liveStats = null;
+window._liveEnquiries = null;
+
+function loadLiveData(isManualSync) {
+  const url = getSheetsUrl();
+  const liveBanner = document.getElementById('live-data-banner');
+  const demoBanner = document.getElementById('demo-data-banner');
+
+  if (!url || url.includes('YOUR_SCRIPT_ID')) {
+    if (isManualSync) {
+      alert('⚠️ No Google Sheets URL configured yet.\n\nGo to Settings → Google Sheets Integration to add your Apps Script URL.');
+    }
+    window._liveDataConnected = false;
+    if (liveBanner) liveBanner.style.display = 'none';
+    if (demoBanner) demoBanner.style.display = 'block';
+    renderEnquiries();
+    renderBarChart();
+    renderTopSearches();
+    return;
+  }
+
+  Promise.all([
+    fetch(`${url}?action=getStats`).then(r => r.json()),
+    fetch(`${url}?action=getEnquiries`).then(r => r.json())
+  ]).then(([statsRes, enqRes]) => {
+    if (statsRes.success) window._liveStats = statsRes.data;
+    if (enqRes.success) window._liveEnquiries = enqRes.data;
+    window._liveDataConnected = true;
+
+    if (liveBanner) liveBanner.style.display = 'block';
+    if (demoBanner) demoBanner.style.display = 'none';
+
+    if (window._liveStats) {
+      document.getElementById('total-searches-value').textContent = window._liveStats.totalSearches;
+      document.getElementById('total-enquiries-value').textContent = window._liveStats.totalEnquiries;
+      document.getElementById('searches-change').textContent = window._liveStats.totalSearches > 0 ? 'live' : '—';
+      document.getElementById('enquiries-change').textContent = window._liveStats.totalEnquiries > 0 ? `${window._liveStats.totalEnquiries} total` : '—';
+      const enqBadge = document.getElementById('enq-badge');
+      if (enqBadge) enqBadge.textContent = window._liveStats.totalEnquiries;
+    }
+
+    renderEnquiries();
+    renderBarChart();
+    renderTopSearches();
+
+    if (isManualSync) alert('✅ Synced with Google Sheets!');
+  }).catch(err => {
+    window._liveDataConnected = false;
+    if (liveBanner) liveBanner.style.display = 'none';
+    if (demoBanner) demoBanner.style.display = 'block';
+    renderEnquiries();
+    renderBarChart();
+    renderTopSearches();
+    if (isManualSync) alert(`❌ Could not sync: ${err}`);
+  });
+}
+
+// ── INIT ──────────────────────────────────────
+function initDashboard() {
+  renderOrders(sampleOrders.slice(0,5), 'recent-orders-body', false);
+  renderOrders(sampleOrders, 'orders-body', true);
+  renderProducts();
+  renderInventory();
+  renderCustomers();
+  renderReviews();
+
+  const savedUrl = getSheetsUrl();
+  const urlInput = document.getElementById('sheets-url');
+  if (savedUrl && urlInput) urlInput.value = savedUrl;
+
+  loadLiveData();
+}
+</script>
+</body>
+</html>
