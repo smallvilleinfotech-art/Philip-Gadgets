@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://smallvilleinfotech-art.github.io/Philip-Gadgets/sitemap.xml
