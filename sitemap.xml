@@ -1,8 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+
+  <!-- Homepage -->
   <url>
     <loc>https://smallvilleinfotech-art.github.io/Philip-Gadgets/</loc>
+    <lastmod>2026-06-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
+
+    <!-- Product images for Google Image Search -->
+    <image:image><image:loc>https://smallvilleinfotech-art.github.io/Philip-Gadgets/iphone-16-pro-max.jpg</image:loc><image:title>iPhone 16 Pro Max - Philip Gadgets Lagos</image:title></image:image>
+    <image:image><image:loc>https://smallvilleinfotech-art.github.io/Philip-Gadgets/iphone-15-pro-max.jpg</image:loc><image:title>iPhone 15 Pro Max - Philip Gadgets Lagos</image:title></image:image>
+    <image:image><image:loc>https://smallvilleinfotech-art.github.io/Philip-Gadgets/samsung-galaxy-s25-ultra.jpg</image:loc><image:title>Samsung Galaxy S25 Ultra - Philip Gadgets Lagos</image:title></image:image>
+    <image:image><image:loc>https://smallvilleinfotech-art.github.io/Philip-Gadgets/samsung-galaxy-s24-ultra.jpg</image:loc><image:title>Samsung Galaxy S24 Ultra - Philip Gadgets Lagos</image:title></image:image>
+    <image:image><image:loc>https://smallvilleinfotech-art.github.io/Philip-Gadgets/tecno-camon-40-pro.jpg</image:loc><image:title>Tecno Camon 40 Pro - Philip Gadgets Lagos</image:title></image:image>
+    <image:image><image:loc>https://smallvilleinfotech-art.github.io/Philip-Gadgets/infinix-note-50-pro.jpg</image:loc><image:title>Infinix Note 50 Pro - Philip Gadgets Lagos</image:title></image:image>
+    <image:image><image:loc>https://smallvilleinfotech-art.github.io/Philip-Gadgets/xiaomi-14-ultra.jpg</image:loc><image:title>Xiaomi 14 Ultra - Philip Gadgets Lagos</image:title></image:image>
+    <image:image><image:loc>https://smallvilleinfotech-art.github.io/Philip-Gadgets/google-pixel-8-pro.jpg</image:loc><image:title>Google Pixel 8 Pro - Philip Gadgets Lagos</image:title></image:image>
+    <image:image><image:loc>https://smallvilleinfotech-art.github.io/Philip-Gadgets/oneplus-12.jpg</image:loc><image:title>OnePlus 12 - Philip Gadgets Lagos</image:title></image:image>
+    <image:image><image:loc>https://smallvilleinfotech-art.github.io/Philip-Gadgets/asus-rog-phone-8.jpg</image:loc><image:title>ASUS ROG Phone 8 - Philip Gadgets Lagos</image:title></image:image>
   </url>
+
 </urlset>

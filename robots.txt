@@ -1,4 +1,11 @@
 User-agent: *
 Allow: /
 
+# Block admin dashboard from search results
+Disallow: /admin.html
+
+# Block any tracking/config files
+Disallow: /AppsScript_Code.gs
+Disallow: /SETUP_GUIDE.md
+
 Sitemap: https://smallvilleinfotech-art.github.io/Philip-Gadgets/sitemap.xml
